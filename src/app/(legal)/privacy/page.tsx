@@ -1,6 +1,9 @@
+import MainHeader from "@/components/shared/main_header";
+
 export default function PrivacyScreen() {
-    return (<main>
-        <h1>Privacy</h1>
-        <p>Privacy policy goes here</p>
-    </main>)
+  return (
+    <main>
+      <MainHeader />
+    </main>
+  );
 }
