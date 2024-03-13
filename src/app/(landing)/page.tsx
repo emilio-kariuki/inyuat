@@ -1,8 +1,8 @@
 "use client";
 
-import MainHeader from "@/components/shared/main_header";
 import Image from "next/image";
 import { Hero } from "./hero";
+import { Element } from "react-scroll";
 
 export default function Home() {
   return (
@@ -11,5 +11,3 @@ export default function Home() {
     </main>
   );
 }
-
-
