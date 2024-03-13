@@ -37,7 +37,7 @@ export function RouteSection() {
     },
     {
       name: "Products",
-      path: "about",
+      path: "service",
     },
     {
       name: "About",
@@ -52,23 +52,23 @@ export function RouteSection() {
     <div className="flex gap-5">
       {routes.map((route, index) => {
         return (
-          <div
+          <Link
+            className="font-medium hover:text-white"
+            activeClass="active"
+            to={route.path}
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
             key={index}
-            className=" hover:bg-green-800 px-5 py-2 rounded-[40px] hover:text-white"
           >
-            <Link
-              className="font-medium hover:text-white"
-              activeClass="active"
-              to={route.path}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
+            <div
               key={index}
+              className=" hover:bg-green-800 px-5 py-2 rounded-[40px] hover:text-white"
             >
-              {route.name}
-            </Link>
-          </div>
+              <h2 className="font-medium hover:text-white">{route.name}</h2>
+            </div>
+          </Link>
         );
       })}
     </div>
