@@ -45,7 +45,7 @@ export function RouteSection() {
     },
     {
       name: "FAQ",
-      path: "menu",
+      path: "faq",
     },
   ];
   return (
