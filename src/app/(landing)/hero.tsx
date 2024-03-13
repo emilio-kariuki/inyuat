@@ -3,17 +3,16 @@
 import { Quicksand, } from "next/font/google";
 import { ArrowUpRight } from "lucide-react";
 import { Element } from "react-scroll";
-import localFont from 'next/font/local'
+import { monasans } from "@/lib/fonts";
 
-const monasans = localFont({ src: '../../assets/mona-sans.ttf' })
 
-const quicksand = Quicksand({ subsets: ["latin"], weight: ["600"] });
+
 
 export function Hero() {
   return (
     <Element name="hero">
       <section>
-        <div className="flex flex-col justify-center items-center mt-28">
+        <div className="flex flex-col justify-center items-center mt-28 mb-32">
           <h2
             className={`text-[45px] font-normal max-w-[980px] text-center ${monasans.className}`}
           >
