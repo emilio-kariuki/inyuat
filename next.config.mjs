@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const config = {
+    images:{
+      domains: ["www.picsa.pro"],
+    }
+  };
 
-export default nextConfig;
+export default config;

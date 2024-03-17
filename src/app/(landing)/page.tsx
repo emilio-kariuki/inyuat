@@ -5,6 +5,7 @@ import { Hero } from "./hero";
 import { Element } from "react-scroll";
 import { ServiceSection } from "./service";
 import { FAQ } from "./faq";
+import VideoSection from "./video";
 
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="h-full w-full bg-[#EDF3F2]">
       <Hero />
       <ServiceSection />
+      <VideoSection />
       <FAQ />
     </main>
   );
