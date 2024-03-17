@@ -4,42 +4,63 @@ import { ArrowUpRight } from "lucide-react";
 import { Element } from "react-scroll";
 
 
-export default function VideoSection(){
-    return (
-        <Element name="video">
-            <section>
-            <div className="flex flex-col #f9f9f9 px-16 py-32 w-full ">
-              <h3 className="flex items-center bg-lime-100 p-4 rounded-[15px] ">
-                CASE STUDIES
-              </h3>
-          <h3
-            className={`font-medium text-[30px]  text-black ${monasans.className} mt-6`}
-          >
-            Loved by industry leaders
-          </h3>
-          <h3
-            className={`text-[30px] font-medium max-w-4xl  text-black  ${monasans.className}`}
-          >
-            See what customers are saying
-            
-          </h3>
-          <div className="flex items-end bg-[#C1FB6B] hover:bg-[#b1e661] p-4 rounded-[15px] gap-2">
-            <p className="text-[18px] text-black font-medium">Customer Stories</p>
-            <ArrowUpRight size={20} />
+export default function VideoSection() {
+  return (
+    <Element name="video">
+      <section>
+        <div className="flex flex-col bg-[#f9f9f9] px-32 py-32">
+          <div className="flex flex-col bg-transparent w-full ">
+            <div className="flex flex-row">
+              <div className=" bg-lime-100  rounded-[15px]">
+                <p className="mx-3 my-2 font-semibold text-[14px] text-black">CASE STUDIES</p>
+              </div>
+              <div>
+
+              </div>
+            </div>
+
+            <div className="flex flex-row  justify-between mt-6 items-end">
+              <div>
+                <h3
+                  className={`font-normal text-[35px]  text-black ${monasans.className} `}
+                >
+                  Loved by industry leaders
+                  <br>
+                  </br> See what customers are saying
+                </h3>
+
+              </div>
+              <div className="flex flex-row bg-[#C1FB6B] hover:bg-[#b1e661] p-4 rounded-[15px] gap-2 items-center h-[55px]">
+                <p className="text-[18px] text-black font-medium">Customer Stories</p>
+                <ArrowUpRight size={20} />
+              </div>
+            </div>
+
           </div>
-          </div>
-        <div className="bg-slate-200 box-content h-56 w-32 p-4 border-4">
-        <Image alt='image' src={"https://www.picsa.pro/profile.jpg"} width={300} height={300}/>
-        <p className="mb-8 text-[22px]">For a freelancer, traditional banks are archaic, I know exactly how much I pay for every service I need.</p>
-        <p className="text-green-700">Momento for services</p>
+          <TestimonyContainer/>
 
         </div>
-                
-                
-                
-            </section>
 
-        </Element>
+      </section>
 
-    );
+    </Element >
+
+  );
+}
+
+function TestimonyContainer(){
+  return(
+     <div className="bg-slate-200 p-4 border-4 w-1/3 rounded-[30px] mt-20">
+      <div>
+      <Image className=" rounded-[30px] object-cover lg:h-[400px] lg:w-[500px] md:h-[100px] md:w-[200px] sm:h-[0px] sm:w-[0px]" alt='image' width={500} height={100} src={"https:www.picsa.pro/profile.jpg"} />
+
+      </div>
+           <p className="mb-8 text-[22px] mt-9">For a freelancer, traditional banks are archaic, I know exactly how much I pay for every service I need.</p>
+          <p className="text-green-700">Momento for services</p>
+
+         </div>
+
+
+
+  );
 }
