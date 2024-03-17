@@ -1,8 +1,8 @@
 "use client";
 
 import { Quicksand, } from "next/font/google";
-import { ArrowUpRight } from "lucide-react";
-import { Element } from "react-scroll";
+import { ArrowUpRight,ArrowDownFromLine } from "lucide-react";
+import { Element, Link } from "react-scroll";
 import { monasans } from "@/lib/fonts";
 import { GridPattern } from "@/components/shared/pattern";
 
@@ -14,7 +14,7 @@ export function Hero() {
     <Element name="hero">
       <section>
       
-        <div className="flex flex-col justify-center items-center mt-28 mb-40 h-1/2">
+        <div className="flex flex-col justify-center items-center mt-28 mb-40 h-[700px]">
           <h2
             className={`text-[45px] font-normal max-w-[980px] text-center ${monasans.className}`}
           >
@@ -27,7 +27,23 @@ export function Hero() {
             customers with the freshest.
           </h4>
           <DiscoverSection />
-        </div>
+          
+          
+          <Link
+            className="font-medium hover:text-white"
+            activeClass="active"
+            to='service'
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+          >
+            <div className="bg-white rounded-full p-5 absolute bottom-4">
+            <ArrowDownFromLine />
+            </div>
+          </Link>
+          </div>
+        
         {/* <div className="text-green-900/10">
         <GridPattern x="80%" patternTransform="translate(0 80)" />
       </div> */}

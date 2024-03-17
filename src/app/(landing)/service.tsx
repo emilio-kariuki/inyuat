@@ -82,11 +82,11 @@ const services = [
     description:
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi",
   },
-  {
-    title: "Fresh Meat",
-    description:
-      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi",
-  },
+//   {
+//     title: "Fresh Meat",
+//     description:
+//       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi",
+//   },
 ];
 
 function ServiceContainer({ ...props }) {

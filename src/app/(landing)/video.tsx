@@ -3,7 +3,6 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Element } from "react-scroll";
 
-
 export default function VideoSection() {
   return (
     <Element name="video">
@@ -12,11 +11,11 @@ export default function VideoSection() {
           <div className="flex flex-col bg-transparent w-full ">
             <div className="flex flex-row">
               <div className=" bg-lime-100  rounded-[15px]">
-                <p className="mx-3 my-2 font-semibold text-[14px] text-black">CASE STUDIES</p>
+                <p className="mx-3 my-2 font-semibold text-[14px] text-black">
+                  CASE STUDIES
+                </p>
               </div>
-              <div>
-
-              </div>
+              <div></div>
             </div>
 
             <div className="flex flex-row  justify-between mt-6 items-end">
@@ -25,42 +24,41 @@ export default function VideoSection() {
                   className={`font-normal text-[35px]  text-black ${monasans.className} `}
                 >
                   Loved by industry leaders
-                  <br>
-                  </br> See what customers are saying
+                  <br></br> See what customers are saying
                 </h3>
-
               </div>
               <div className="flex flex-row bg-[#C1FB6B] hover:bg-[#b1e661] p-4 rounded-[15px] gap-2 items-center h-[55px]">
-                <p className="text-[18px] text-black font-medium">Customer Stories</p>
+                <p className="text-[18px] text-black font-medium">
+                  Customer Stories
+                </p>
                 <ArrowUpRight size={20} />
               </div>
             </div>
-
           </div>
-          <TestimonyContainer/>
-
+          <TestimonyContainer />
         </div>
-
       </section>
-
-    </Element >
-
+    </Element>
   );
 }
 
-function TestimonyContainer(){
-  return(
-     <div className="bg-slate-200 p-4 border-4 w-1/3 rounded-[30px] mt-20">
+function TestimonyContainer() {
+  return (
+    <div className="bg-slate-200 p-4 border-4 w-1/3 rounded-[30px] mt-20">
       <div>
-      <Image className=" rounded-[30px] object-cover lg:h-[400px] lg:w-[500px] md:h-[100px] md:w-[200px] sm:h-[0px] sm:w-[0px]" alt='image' width={500} height={100} src={"https:www.picsa.pro/profile.jpg"} />
-
+        <Image
+          className=" rounded-[30px] object-cover lg:h-[400px] lg:w-[500px] md:h-[100px] md:w-[200px] sm:h-[0px] sm:w-[0px]"
+          alt="image"
+          width={500}
+          height={100}
+          src={"https:www.picsa.pro/profile.jpg"}
+        />
       </div>
-           <p className="mb-8 text-[22px] mt-9">For a freelancer, traditional banks are archaic, I know exactly how much I pay for every service I need.</p>
-          <p className="text-green-700">Momento for services</p>
-
-         </div>
-
-
-
+      <p className="mb-8 text-[22px] mt-9">
+        For a freelancer, traditional banks are archaic, I know exactly how much
+        I pay for every service I need.
+      </p>
+      <p className="text-green-700">Momento for services</p>
+    </div>
   );
 }
