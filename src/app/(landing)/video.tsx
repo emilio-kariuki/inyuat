@@ -3,11 +3,31 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Element } from "react-scroll";
 
+const testimonials = [
+  {
+    image: "https://www.picsa.pro/profile.jpg",
+    title : "For a freelancer, traditional banks are really archaic. I know exactly how much I pay for every service I need.",
+    subtitle : "Momento for services",
+    name : "Julia Stephanie",
+    role: "Founder . Zendesk"
+
+  },
+  {
+    image: "https://www.picsa.pro/profile.jpg",
+    title : "Excellent service! We are able to deposit the share capital online, and the customer service was really helpful.",
+    subtitle : "Momento for SaaS",
+    name : "Brandon Marron",
+    role: "Founder . Starburst"
+
+  }
+
+]
+
 export default function VideoSection() {
   return (
     <Element name="video">
       <section>
-        <div className="flex flex-col bg-[#f9f9f9] px-32 py-32">
+        <div className="flex flex-col bg-[#f9f9f9] px-32 py-32 ">
           <div className="flex flex-col bg-transparent w-full ">
             <div className="flex flex-row">
               <div className=" bg-lime-100  rounded-[15px]">
@@ -35,30 +55,44 @@ export default function VideoSection() {
               </div>
             </div>
           </div>
-          <TestimonyContainer />
+
+
+      <div className="flex flex-row gap-16 w-full justify-center items-center">
+      {
+        testimonials.map((testimonial, index)=>{
+          return <TestimonyContainer key={index} image={testimonial.image} title={testimonial.title} subtitle={testimonial.subtitle} 
+          name ={testimonial.name} role={testimonial.role}/>
+        })
+      }
+      </div>
         </div>
       </section>
     </Element>
   );
 }
 
-function TestimonyContainer() {
+function TestimonyContainer({ ...props }) {
   return (
-    <div className="bg-slate-200 p-4 border-4 w-1/3 rounded-[30px] mt-20">
-      <div>
+    <div className="bg-slate-200 p-4 border-4 w-1/2 rounded-[30px] mt-20">
+      <div className="relative w-full">
         <Image
-          className=" rounded-[30px] object-cover lg:h-[400px] lg:w-[500px] md:h-[100px] md:w-[200px] sm:h-[0px] sm:w-[0px]"
+          className=" w-full blur rounded-[30px] object-cover lg:h-[400px] lg:w-[1000px] md:h-[200px] md:w-[200px] sm:h-[0px] sm:w-[0px]"
           alt="image"
           width={500}
           height={100}
-          src={"https:www.picsa.pro/profile.jpg"}
+          src={props.image}
         />
+        <div className="flex flex-row justify-between absolute top-2 m-4 w-full pr-8">
+          <p className={`font-semibold text-[20px]  text-black ${monasans.className} `}>{props.name}</p>
+          <p className={`font-semibold text-[20px]  text-black ${monasans.className} `}>{props.role}</p>
+
+        </div>
       </div>
-      <p className="mb-8 text-[22px] mt-9">
-        For a freelancer, traditional banks are archaic, I know exactly how much
-        I pay for every service I need.
+      <p className="mb-8 text-[25px] mt-9 font-medium">
+        {props.title}
       </p>
-      <p className="text-green-700">Momento for services</p>
+      <p className="text-green-700 text-[18px] font-medium">{props.subtitle}</p>
+
     </div>
   );
 }
