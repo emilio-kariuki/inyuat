@@ -30,7 +30,7 @@ export function Hero() {
           
           
           <Link
-            className="font-medium hover:text-white"
+            className="font-medium "
             activeClass="active"
             to='service'
             spy={true}
@@ -38,7 +38,7 @@ export function Hero() {
             offset={-70}
             duration={500}
           >
-            <div className="bg-white rounded-full p-5 absolute bottom-4">
+            <div className="bg-white rounded-full p-5 absolute bottom-4 hover:bg-[#C1FB6B]">
             <ArrowDownFromLine />
             </div>
           </Link>
