@@ -6,7 +6,8 @@ import { Element } from "react-scroll";
 import { ServiceSection } from "./service";
 import { FAQ } from "./faq";
 import VideoSection from "./video";
-
+import { Contact } from "lucide-react";
+import { ContactSection} from "./contact";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <ServiceSection />
       <VideoSection />
       <FAQ />
+      <ContactSection />
     </main>
   );
 }

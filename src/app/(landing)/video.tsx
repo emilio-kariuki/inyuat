@@ -6,7 +6,7 @@ import { Element } from "react-scroll";
 const testimonials = [
   {
     image: "https://www.picsa.pro/profile.jpg",
-    title : "For a freelancer, traditional banks are really archaic. I know exactly how much I pay for every service I need.",
+    // title : "For a freelancer, traditional banks are really archaic. I know exactly how much I pay for every service I need.  ",
     subtitle : "Momento for services",
     name : "Julia Stephanie",
     role: "Founder . Zendesk"
@@ -19,7 +19,8 @@ const testimonials = [
     name : "Brandon Marron",
     role: "Founder . Starburst"
 
-  }
+  },
+ 
 
 ]
 
