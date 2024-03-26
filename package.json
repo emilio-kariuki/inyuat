@@ -5,6 +5,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "start": "next dev",
+
     "lint": "next lint",
     "clean": "next clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""

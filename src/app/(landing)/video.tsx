@@ -6,7 +6,7 @@ import { Element } from "react-scroll";
 const testimonials = [
   {
     image: "https://www.picsa.pro/profile.jpg",
-    // title : "For a freelancer, traditional banks are really archaic. I know exactly how much I pay for every service I need.  ",
+    title : "For a freelancer, traditional banks are really archaic. I know exactly how much I pay for every service I need.  ",
     subtitle : "Momento for services",
     name : "Julia Stephanie",
     role: "Founder . Zendesk"
@@ -84,12 +84,12 @@ function TestimonyContainer({ ...props }) {
           src={props.image}
         />
         <div className="flex flex-row justify-between absolute top-2 m-4 w-full pr-8">
-          <p className={`font-semibold text-[20px]  text-black ${monasans.className} `}>{props.name}</p>
-          <p className={`font-semibold text-[20px]  text-black ${monasans.className} `}>{props.role}</p>
+          <p className={`font-semibold text-[18px]  text-black ${monasans.className} `}>{props.name}</p>
+          <p className={`font-semibold text-[18px]  text-black ${monasans.className} `}>{props.role}</p>
 
         </div>
       </div>
-      <p className="mb-8 text-[25px] mt-9 font-medium">
+      <p className="mb-8 text-[18px] mt-9 font-medium">
         {props.title}
       </p>
       <p className="text-green-700 text-[18px] font-medium">{props.subtitle}</p>
