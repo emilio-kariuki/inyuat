@@ -33,7 +33,7 @@ const faq = [
 export function FAQ() {
   return (
     <Element name="faq">
-      <div className="flex flex-col justify-center items-center mt-28 mb-40 h-1/2 w-2xl">
+      <div className="flex flex-col justify-center items-center my-60 mb-40 h-1/2 w-2xl">
         <h2
           className={`text-[30px] font-normal max-w-[980px] text-center ${monasans.className}`}
         >

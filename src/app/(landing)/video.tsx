@@ -84,8 +84,8 @@ function TestimonyContainer({ ...props }) {
           src={props.image}
         />
         <div className="flex flex-row justify-between absolute top-2 m-4 w-full pr-8">
-          <p className={`font-semibold text-[18px]  text-black ${monasans.className} `}>{props.name}</p>
-          <p className={`font-semibold text-[18px]  text-black ${monasans.className} `}>{props.role}</p>
+          <p className={`font-semibold text-[15px]  text-black ${monasans.className} `}>{props.name}</p>
+          <p className={`font-semibold text-[15px]  text-black ${monasans.className} `}>{props.role}</p>
 
         </div>
       </div>

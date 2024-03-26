@@ -36,11 +36,15 @@ export function RouteSection() {
       path: "hero",
     },
     {
-      name: "Products",
-      path: "service",
+      name: "About",
+      path: "about",
     },
     {
-      name: "About",
+      name: "Products",
+      path: "products",
+    },
+    {
+      name: "Contact",
       path: "contact",
     },
     {
