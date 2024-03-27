@@ -12,13 +12,13 @@ export default function ContactSection() {
             <h1
               className={`text-3xl md:text-5xl lg:text-7xl font-bold text-black ${monasans.className}`}
             >
-              Let's get<br></br>in touch
+              Lets get<br></br>in touch
             </h1>
 
             <p
               className={`font-bold text-2xl  mt-8 md:mt-20 lg:mt-20 ${monasans.className}`}
             >
-              Don't be afraid to <br></br>say hello to us
+              Dont be afraid to <br></br>say hello to us
             </p>
 
             <p className=" mt-4 md:mt-8 lg:mt-8 text-gray-500">Phone</p>
@@ -54,7 +54,7 @@ export default function ContactSection() {
               <p
                 className={`${monasans.className} w-[350px] mr-2 lg:mr-0 md:mr-0`}
               >
-                Great! We are excited to hear from you and let's start something
+                Great! We are excited to hear from you and lets start something
                 special together<br></br> Reach out to us for enquiry{" "}
               </p>
             </div>
