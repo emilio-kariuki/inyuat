@@ -5,22 +5,22 @@ import { BookText, ArrowUpRight } from "lucide-react";
 export function ServiceSection() {
   return (
     <Element name="about">
-      <section className="relative px-1 py-20 bg-black-100 mx-20">
-        <div className="flex flex-col bg-[#004D3F] px-16 py-32 w-full items-center justify-center">
+      <section className="relative px-1 py-10 md:py-20 lg:py-20 bg-black-100 ">
+        <div className="flex flex-col bg-[#004D3F] px-10 py-24 md:px-16 md:py-32 lg:px-16 lg:py-32 w-full  items-center justify-center">
           <h3
-            className={`font-medium text-[35px] mb-4 text-white ${monasans.className}`}
+            className={`font-medium text-[30px] md:text-[35px] lg:text-[35px] text-center md:text-start lg:text-start mb-4 text-white ${monasans.className}`}
           >
             We offer a wide range of products
           </h3>
           <h3
-            className={`text-[16px] font-normal max-w-4xl text-center gap-3 text-[#F9FAFA]  ${monasans.className}`}
+            className={`text-[14px] md:text-[16px] lg:text-[16px] text-center mx-w-[450px] font-normal max-w-4xl gap-3 text-[#F9FAFA]  ${monasans.className}`}
           >
             Inyuat Farm Fresh was founded in 2010 with the goal of providing the
             world with the best quality fruits and vegetables. We are a
             family-owned business that is dedicated to providing our customers
             with the freshest home.
           </h3>
-          <div className="flex justify-evenly gap-5 mt-20">
+          <div className="flex justify-evenly gap-6 mt-20">
             {services.map((service, index) => {
               return (
                 <ServiceContainer
@@ -32,7 +32,7 @@ export function ServiceSection() {
               );
             })}
           </div>
-          <div className="flex flex-row justify-center items-center  mt-20">
+          <div className="hidden md:flex lg:flex flex-row justify-center items-center  mt-20">
             <h2
               className={`text-[30px] text-[#F9FAFA] font-normal ${quicksand.className} `}
             >

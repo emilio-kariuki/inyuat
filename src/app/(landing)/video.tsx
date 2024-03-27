@@ -28,7 +28,7 @@ export default function VideoSection() {
   return (
     <Element name="video">
       <section>
-        <div className="flex flex-col bg-[#f9f9f9] px-32 py-32 ">
+        <div className="flex flex-col bg-[#f9f9f9] px-5 py-20 md:px-32 md:py-32 lg:px-32 lg:py-32 ">
           <div className="flex flex-col bg-transparent w-full ">
             <div className="flex flex-row">
               <div className=" bg-lime-100  rounded-[15px]">
@@ -39,17 +39,17 @@ export default function VideoSection() {
               <div></div>
             </div>
 
-            <div className="flex flex-row  justify-between mt-6 items-end">
+            <div className=" md:flex md:flex-row lg:flex lg:flex-row   justify-between mt-6 items-end">
               <div>
                 <h3
-                  className={`font-normal text-[35px]  text-black ${monasans.className} `}
+                  className={`font-normal text-[25px] md:text-[35px] lg:text-[35px]  text-black ${monasans.className} `}
                 >
                   Loved by industry leaders
                   <br></br> See what customers are saying
                 </h3>
               </div>
-              <div className="flex flex-row bg-[#C1FB6B] hover:bg-[#b1e661] p-4 rounded-[15px] gap-2 items-center h-[55px]">
-                <p className="text-[18px] text-black font-medium">
+              <div className="flex w-fit flex-row bg-[#C1FB6B] hover:bg-[#b1e661] mt-5 md:mt-0 lg:mt-0 p-4 rounded-[15px] gap-2 items-center h-[55px]">
+                <p className="text-[14px] md:text-[18px] lg:text-[18px] text-black font-medium">
                   Customer Stories
                 </p>
                 <ArrowUpRight size={20} />
@@ -58,7 +58,7 @@ export default function VideoSection() {
           </div>
 
 
-      <div className="flex flex-row gap-16 w-full justify-center items-center">
+      <div className=" md:flex lg:flex flex-row gap-2 md:gap-16 lg:gap-16 w-full justify-center items-center">
       {
         testimonials.map((testimonial, index)=>{
           return <TestimonyContainer key={index} image={testimonial.image} title={testimonial.title} subtitle={testimonial.subtitle} 
@@ -74,15 +74,16 @@ export default function VideoSection() {
 
 function TestimonyContainer({ ...props }) {
   return (
-    <div className="bg-slate-200 p-4 border-4 w-1/2 rounded-[30px] mt-20">
+    <div className="bg-slate-200 p-4 border-4  rounded-[30px] mt-20">
       <div className="relative w-full">
         <Image
-          className=" w-full blur rounded-[30px] object-cover lg:h-[400px] lg:w-[1000px] md:h-[200px] md:w-[200px] sm:h-[0px] sm:w-[0px]"
+          className=" w-full blur rounded-[30px] object-cover lg:h-[400px] lg:w-[1000px] md:h-[200px] md:w-[500px] sm:h-[50px] sm:w-[500px]"
           alt="image"
           width={500}
-          height={100}
+          height={20}
           src={props.image}
         />
+        
         <div className="flex flex-row justify-between absolute top-2 m-4 w-full pr-8">
           <p className={`font-semibold text-[15px]  text-black ${monasans.className} `}>{props.name}</p>
           <p className={`font-semibold text-[15px]  text-black ${monasans.className} `}>{props.role}</p>
