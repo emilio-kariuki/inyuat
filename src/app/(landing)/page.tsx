@@ -15,11 +15,10 @@ export default function Home() {
     <main className="h-full w-full bg-[#EDF3F2]">
       <Hero />
       <ServiceSection />
-      <ProductSection/>
+      <ProductSection />
       <VideoSection />
       <FAQ />
-      {/* <ContactSection /> */}
-
+      <ContactSection />
     </main>
   );
 }

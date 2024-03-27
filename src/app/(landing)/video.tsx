@@ -6,29 +6,27 @@ import { Element } from "react-scroll";
 const testimonials = [
   {
     image: "https://www.picsa.pro/profile.jpg",
-    title : "For a freelancer, traditional banks are really archaic. I know exactly how much I pay for every service I need.  ",
-    subtitle : "Momento for services",
-    name : "Julia Stephanie",
-    role: "Founder . Zendesk"
-
+    title:
+      "For a freelancer, traditional banks are really archaic. I know exactly how much I pay for every service I need.  ",
+    subtitle: "Momento for services",
+    name: "Julia Stephanie",
+    role: "Founder . Zendesk",
   },
   {
     image: "https://www.picsa.pro/profile.jpg",
-    title : "Excellent service! We are able to deposit the share capital online, and the customer service was really helpful.",
-    subtitle : "Momento for SaaS",
-    name : "Brandon Marron",
-    role: "Founder . Starburst"
-
+    title:
+      "Excellent service! We are able to deposit the share capital online, and the customer service was really helpful.",
+    subtitle: "Momento for SaaS",
+    name: "Brandon Marron",
+    role: "Founder . Starburst",
   },
- 
-
-]
+];
 
 export default function VideoSection() {
   return (
     <Element name="video">
       <section>
-        <div className="flex flex-col bg-[#f9f9f9] px-5 py-20 md:px-32 md:py-32 lg:px-32 lg:py-32 ">
+        <div className="flex flex-col bg-[#f9f9f9] px-5 py-20 md:px-32 md:py-32 lg:px-60 lg:py-32 ">
           <div className="flex flex-col bg-transparent w-full ">
             <div className="flex flex-row">
               <div className=" bg-lime-100  rounded-[15px]">
@@ -57,15 +55,20 @@ export default function VideoSection() {
             </div>
           </div>
 
-
-      <div className=" md:flex lg:flex flex-row gap-2 md:gap-16 lg:gap-16 w-full justify-center items-center">
-      {
-        testimonials.map((testimonial, index)=>{
-          return <TestimonyContainer key={index} image={testimonial.image} title={testimonial.title} subtitle={testimonial.subtitle} 
-          name ={testimonial.name} role={testimonial.role}/>
-        })
-      }
-      </div>
+          <div className=" md:flex lg:flex flex-row gap-2 md:gap-16 lg:gap-16 w-full justify-center items-center">
+            {testimonials.map((testimonial, index) => {
+              return (
+                <TestimonyContainer
+                  key={index}
+                  image={testimonial.image}
+                  title={testimonial.title}
+                  subtitle={testimonial.subtitle}
+                  name={testimonial.name}
+                  role={testimonial.role}
+                />
+              );
+            })}
+          </div>
         </div>
       </section>
     </Element>
@@ -83,18 +86,22 @@ function TestimonyContainer({ ...props }) {
           height={20}
           src={props.image}
         />
-        
-        <div className="flex flex-row justify-between absolute top-2 m-4 w-full pr-8">
-          <p className={`font-semibold text-[15px]  text-black ${monasans.className} `}>{props.name}</p>
-          <p className={`font-semibold text-[15px]  text-black ${monasans.className} `}>{props.role}</p>
 
+        <div className="flex flex-row justify-between absolute top-2 m-4 w-full pr-8">
+          <p
+            className={`font-semibold text-[15px]  text-black ${monasans.className} `}
+          >
+            {props.name}
+          </p>
+          <p
+            className={`font-semibold text-[15px]  text-black ${monasans.className} `}
+          >
+            {props.role}
+          </p>
         </div>
       </div>
-      <p className="mb-8 text-[18px] mt-9 font-medium">
-        {props.title}
-      </p>
+      <p className="mb-8 text-[18px] mt-9 font-medium">{props.title}</p>
       <p className="text-green-700 text-[18px] font-medium">{props.subtitle}</p>
-
     </div>
   );
 }

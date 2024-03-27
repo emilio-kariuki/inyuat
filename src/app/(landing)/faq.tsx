@@ -33,7 +33,7 @@ const faq = [
 export function FAQ() {
   return (
     <Element name="faq">
-      <div className="flex flex-col justify-center items-center my-60 mb-40 h-1/2 w-2xl">
+      <div className="flex flex-col justify-center items-center px-6 my-20 lg:my-60 lg-40 md:my-60 md:mb-40 h-1/2 w-full md:w-2xl lg:w-2xl">
         <h2
           className={`text-[30px] font-normal max-w-[980px] text-center ${monasans.className}`}
         >
@@ -45,7 +45,7 @@ export function FAQ() {
           Here are some of the most commonly asked questions about Inyuat Farm
           Fresh, please feel free to contact us.
         </h4>
-        <div className="mt-10 w-full max-w-[980px]">
+        <div className="mt-10 w-full max-w-[980px] ">
           <Accordion type="single" collapsible>
             {faq.map((item, index) => {
               return (
