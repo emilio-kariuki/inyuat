@@ -16,6 +16,7 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@types/react-scroll": "^1.8.10",
+    "carousel": "^0.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "flowbite": "^2.3.0",

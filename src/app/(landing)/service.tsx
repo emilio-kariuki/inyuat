@@ -5,7 +5,7 @@ import { BookText, ArrowUpRight } from "lucide-react";
 export function ServiceSection() {
   return (
     <Element name="about">
-      <section>
+      <section className="relative px-1 py-20 bg-black-100 mx-20">
         <div className="flex flex-col bg-[#004D3F] px-16 py-32 w-full items-center justify-center">
           <h3
             className={`font-medium text-[35px] mb-4 text-white ${monasans.className}`}

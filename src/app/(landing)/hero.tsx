@@ -12,7 +12,7 @@ import { GridPattern } from "@/components/shared/pattern";
 export function Hero() {
   return (
     <Element name="hero">
-      <section>
+      <section className="relative px-1 py-20 bg-black-100 mx-20">
       
         <div className="flex flex-col justify-center items-center mt-28 mb-40 h-[700px]">
           <h2

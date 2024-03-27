@@ -10,7 +10,7 @@ import { ArrowUpRight, ArrowDownFromLine, MoveRight } from "lucide-react";
 export default function ContactSection() {
     return (
         <Element name="contact">
-            <section>
+            <section className="relative px-1 py-20 bg-black-100 mx-20">
                 <div className="flex flex-row justify-center items-end  bg-white">
                     <div className="flex flex-col p-10 mr-32">
                         <h1 className="text-7xl font-bold text-black">Let's get<br></br>in touch</h1>
