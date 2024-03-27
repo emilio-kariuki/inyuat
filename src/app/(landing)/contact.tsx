@@ -67,34 +67,32 @@ export default function ContactSection() {
                   </p>
                   <div className="flex flex-col lg:gap-7 md:gap-7 gap-4">
                     <div className="flex flex-col justify-center items-center  gap-4">
-                        <div  className="w-full flex flex-col lg:flex-row md:flex-row gap-4">
+                      <div className="w-full flex flex-col lg:flex-row md:flex-row gap-4">
                         <input
-                        className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
-                        type="text"
-                        placeholder="Name"
-                      />
+                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
+                          type="text"
+                          placeholder="Name"
+                        />
 
-                      <input
-                        className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
-                        type="email"
-                        placeholder="Email"
-                      />
-                        </div>
-                     
-                      <div className=" w-full flex flex-col lg:flex-row md:flex-row gap-4 ">
-                      <input
-                        className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
-                        type="phone"
-                        placeholder="Phone"
-                      />
-                      <input
-                        className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
-                        type="text"
-                        placeholder="Subject"
-                      />
+                        <input
+                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
+                          type="email"
+                          placeholder="Email"
+                        />
                       </div>
 
-                      
+                      <div className=" w-full flex flex-col lg:flex-row md:flex-row gap-4 ">
+                        <input
+                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
+                          type="phone"
+                          placeholder="Phone"
+                        />
+                        <input
+                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
+                          type="text"
+                          placeholder="Subject"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

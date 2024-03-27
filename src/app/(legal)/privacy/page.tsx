@@ -1,6 +1,6 @@
 "use client";
 
-import MainHeader from "@/components/shared/main_header";
+import MainHeader from "@/components/shared/desktop_header";
 
 export default function PrivacyScreen() {
   return (
