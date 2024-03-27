@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <body className={`bg-[#EDF3F2] ${inter.className}`}>
-        <MainHeader />
+        {/* <MainHeader /> */}
         <main>{children}</main>
       </body>
     </html>

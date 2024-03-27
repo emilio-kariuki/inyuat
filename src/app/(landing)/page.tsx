@@ -18,7 +18,7 @@ export default function Home() {
       <ProductSection/>
       <VideoSection />
       <FAQ />
-      <ContactSection />
+      {/* <ContactSection /> */}
 
     </main>
   );
