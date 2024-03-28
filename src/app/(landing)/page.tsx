@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Hero } from "./hero";
 import { Element } from "react-scroll";
-import { ServiceSection } from "./service";
+import { ServiceSection } from "./about";
 import { FAQ } from "./faq";
 import VideoSection from "./video";
 import { Contact } from "lucide-react";

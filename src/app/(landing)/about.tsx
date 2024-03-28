@@ -6,7 +6,7 @@ export function ServiceSection() {
   return (
     <Element name="about">
       <section className="relative px-1 py-10 md:py-20 lg:py-20 bg-black-100 ">
-        <div className="flex flex-col bg-[#004D3F] px-10 py-24 md:px-16 md:py-32 lg:px-16 lg:py-32 w-full  items-center justify-center">
+        <div className="flex flex-col bg-[#004D3F] px-5 py-24 md:px-16 md:py-32 lg:px-16 lg:py-32 w-full  items-center justify-center">
           <h3
             className={`font-medium text-[30px] md:text-[35px] lg:text-[35px] text-center md:text-start lg:text-start mb-4 text-white ${monasans.className}`}
           >
