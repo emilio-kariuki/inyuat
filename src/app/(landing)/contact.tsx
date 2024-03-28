@@ -22,7 +22,7 @@ export default function ContactSection() {
             </p>
 
             <p className=" mt-4 md:mt-8 lg:mt-8 text-gray-500">Phone</p>
-            <p className="font-semibold">+(254) 7686 44556</p>
+            <p className="w-full font-semibold">+(254) 7686 44556</p>
 
             <p className=" mt-4 md:mt-8 lg:mt-8  text-gray-500">Email</p>
             <p className="font-semibold">info@inyuatfarmfresh@gmail.com</p>
