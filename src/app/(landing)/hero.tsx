@@ -10,7 +10,7 @@ export function Hero() {
   return (
     <Element name="hero">
       <section className="relative px-1 py-0 md:py-20 lg:py-20 bg-black-100 mx-2 lg:mx-20 md:mx-20">
-        <div className="flex flex-col justify-center items-center mt-5 mb-5 md:mt-28 md:mb-40 lg:mt-28 lg:mb-40 h-[700px]">
+        <div className="flex flex-col justify-center items-center mt-5 mb-5 md:mt-28 md:mb-40 lg:mt-28 lg:mb-40 h-[600px] lg:h-[300px]">
           <h2
             className={`text-[30px] md:text-[45px] lg:text-[45px] font-normal max-w-[980px] text-center ${monasans.className}`}
           >
@@ -29,15 +29,15 @@ export function Hero() {
           <DiscoverSection />
 
           <Link
-            className="font-medium "
+            className="hidden lg:flex font-medium "
             activeClass="active"
-            to="service"
+            to="about"
             spy={true}
             smooth={true}
             offset={-70}
             duration={500}
           >
-            <div className="bg-white rounded-full p-5 absolute bottom-0 hover:bg-[#C1FB6B]">
+            <div className=" bg-white rounded-full p-5 absolute bottom-0  hover:bg-[#C1FB6B]">
               <ArrowDownFromLine />
             </div>
           </Link>

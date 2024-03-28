@@ -2,6 +2,7 @@ import { monasans, quicksand } from "@/lib/fonts";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Element } from "react-scroll";
+import Mangoes from "@/assets/mangoes.png";
 
 const testimonials = [
   {
@@ -79,13 +80,16 @@ function TestimonyContainer({ ...props }) {
   return (
     <div className="bg-slate-200 p-4 border-4  rounded-[30px] mt-20">
       <div className="relative w-full">
+        <div className="relative lg:h-[300px]  md:h-[200px] h-[200px]">
         <Image
-          className=" w-full blur rounded-[30px] object-cover lg:h-[400px] lg:w-[1000px] md:h-[200px] md:w-[500px] sm:h-[50px] sm:w-[500px]"
+          className=" w-full blur rounded-[30px] object-cover  "
           alt="image"
-          width={500}
-          height={20}
+          // width={500}
+          // height={20}
+          fill
           src={props.image}
         />
+        </div>
 
         <div className="flex flex-row justify-between absolute top-2 m-4 w-full pr-8">
           <p
@@ -100,7 +104,7 @@ function TestimonyContainer({ ...props }) {
           </p>
         </div>
       </div>
-      <p className="mb-8 text-[18px] mt-9 font-medium">{props.title}</p>
+      <p className="mb-6 text-[16px] mt-9 font-medium">{props.title}</p>
       <p className="text-green-700 text-[18px] font-medium">{props.subtitle}</p>
     </div>
   );

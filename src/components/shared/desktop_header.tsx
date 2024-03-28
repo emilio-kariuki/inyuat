@@ -81,7 +81,7 @@ export function RouteSection() {
 
 export function ContactButton() {
   return (
-    <div className="flex bg-green-800 rounded-[13px] py-[15px] px-[20px] gap-4 items-center hover:bg-green-700">
+    <div className="flex bg-green-800 rounded-[13px] py-[15px] px-[20px] gap-4 items-center hover:bg-green-700 ml-20">
       <h5 className="font-medium text-[14px] text-white">Contact Us</h5>
       <Mail color="#ffffff" className="h-[18px] w-[18px] " />
     </div>

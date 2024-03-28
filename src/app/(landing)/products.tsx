@@ -78,7 +78,7 @@ const products = [
 export function ProductSection() {
   return (
     <Element name="products">
-      <section className="relative px-1 py-20 bg-black-100 mx-5 md:mx-20 lg:mx-60">
+      <section className="relative px-1 py-20 bg-black-100 mx-5 md:mx-20 lg:mx-40">
         <div className="flex  w-full flex-col justify-center items-center ">
           {/* <h1
           className={`max-w-[600px] text-4xl font-bold text-slate text-center ${monasans.className} mb-10`}
@@ -116,7 +116,7 @@ export function ProductSection() {
 function ProductCard({ product }: { product: any }) {
   return (
     <div
-      className={`flex flex-col max-w-[450px] min-h-[500px] justify-start items-start bg-transparent rounded-[10px] p-[15px] `}
+      className={`flex flex-col max-w-[500px] min-h-[500px] justify-start items-start bg-transparent rounded-[10px] p-[15px] `}
     >
       <Image
         src={product.image}
@@ -147,7 +147,7 @@ export function CarouselSize() {
       }}
       plugins={[
         Autoplay({
-          delay: 2500,
+          delay: 2000,
         }),
       ]}
       className="w-full flex flex-col "

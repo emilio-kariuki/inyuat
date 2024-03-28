@@ -60,9 +60,9 @@ export default function ContactSection() {
             </div>
 
             <div>
-              <div className="bg-black  flex flex-col mx-5 lg:mx-0 md:mx-0 mt-10 py-10 lg:py-20 md:py-20 px-9 mx-w-2xl rounded-[30px] ">
+              <div className="bg-black  flex flex-col mx-5 lg:mx-0 md:mx-0 mt-10 py-10 lg:py-20 md:py-20 px-9 mx-w-2xl  sm:rounded-[30px] md:roundex-[0px]  lg:roundex-[0px] ">
                 <div>
-                  <p className="font-semibold text-white mb-8 text-2xl lg:text-5xl">
+                  <p className="font-semibold text-white mb-8 text-xl lg:text-5xl">
                     Contact Us
                   </p>
                   <div className="flex flex-col lg:gap-7 md:gap-7 gap-4">
