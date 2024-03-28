@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/carousel";
 
 import { Quote } from "lucide-react";
-import { Element } from "react-scroll";
+import { Element, Link } from "react-scroll";
 
 const products = [
   {
@@ -102,12 +102,24 @@ export function ProductSection() {
           <CarouselSize />
         </div>
 
-        <div className="flex items-center justify-center">
-          <div className=" max-w-100 flex gap-2 items-center bg-[#004D3F] hover:bg-[#0a1b17] p-4 px-10 rounded-[10px] mt-10 justify-center">
-            <p className="text-[15px] text-white font-medium">Order with Us</p>
-            <ArrowUpRight size={20} color="#ffffff" />
+        <Link
+          className=" flex font-medium items-center justify-center "
+          activeClass="active"
+          to="contact"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+        >
+          <div className="flex items-center justify-center">
+            <div className=" max-w-100 flex gap-2 items-center bg-[#004D3F] hover:bg-[#0a1b17] p-4 px-10 rounded-[10px] mt-10 justify-center">
+              <p className="text-[15px] text-white font-medium">
+                Order with Us
+              </p>
+              <ArrowUpRight size={20} color="#ffffff" />
+            </div>
           </div>
-        </div>
+        </Link>
       </section>
     </Element>
   );
