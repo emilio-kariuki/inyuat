@@ -5,6 +5,7 @@ import MainHeader from "@/components/shared/desktop_header";
 import localFont from "next/font/local";
 import { inter } from "@/lib/fonts";
 import Header from "@/components/shared/main_header";
+import { ClerkProvider } from '@clerk/nextjs'
 
 export const metadata: Metadata = {
   title: "Inyuat Farm Fresh",
@@ -17,11 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html suppressHydrationWarning lang="en">
       <body className={`bg-[#EDF3F2] ${inter.className}`}>
         <Header />
         <main>{children}</main>
       </body>
     </html>
+    </ClerkProvider>
   );
 }

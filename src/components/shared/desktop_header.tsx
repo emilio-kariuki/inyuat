@@ -2,13 +2,25 @@
 
 import Image from "next/image";
 import logo from "@/assets/logo.png";
-import { Mail } from "lucide-react";
-import { Link } from "react-scroll";
+import { Mail, LogIn, LayoutDashboard } from "lucide-react";
+import { Link as Scroll } from "react-scroll";
+import Link from "next/link";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { User } from "@clerk/nextjs/server";
 export default function DesktopMenu() {
   return (
     <div className=" hidden lg:flex  md:flex items-center mx-[30px] my-[20px] justify-between bg-[#EDF3F2] ">
       <RouteSection />
-      <ContactButton />
+      {/* <ContactButton /> */}
+      <SignedOut>
+        <ContactButton title="Get Started" icon={<LogIn color="#ffffff" className="h-[18px] w-[18px]" />} href={"/sign-in"}/>
+      </SignedOut>
+      <SignedIn >
+        <ContactButton title="Dashboard" icon={<LayoutDashboard color="#ffffff" className="h-[18px] w-[18px]"/>}  href={"dashboard"} />
+        <div className="w-2"></div>
+        <UserButton showName />
+        
+      </SignedIn>
     </div>
   );
 }
@@ -56,7 +68,7 @@ export function RouteSection() {
     <div className="flex  gap-5">
       {routes.map((route, index) => {
         return (
-          <Link
+          <Scroll
             className="font-medium hover:text-white"
             activeClass="active"
             to={route.path}
@@ -72,18 +84,33 @@ export function RouteSection() {
             >
               <h2 className="font-medium hover:text-white">{route.name}</h2>
             </div>
-          </Link>
+          </Scroll>
         );
       })}
     </div>
   );
 }
 
-export function ContactButton() {
+export function ContactButton({
+  title ,
+  icon ,
+  href 
+}:{
+  title: string;
+  icon: JSX.Element;
+  href: string;
+
+})  {
   return (
+    <Link
+    href={href}
+    >
     <div className="flex bg-green-800 rounded-[13px] py-[15px] px-[20px] gap-4 items-center hover:bg-green-700 ml-20">
-      <h5 className="font-medium text-[14px] text-white">Contact Us</h5>
-      <Mail color="#ffffff" className="h-[18px] w-[18px] " />
+      {icon}
+      <h5 className="font-medium text-[14px] text-white">{title}</h5>
+      
+      {/* <Mail color="#ffffff" className="h-[18px] w-[18px] " /> */}
     </div>
+    </Link>
   );
 }
