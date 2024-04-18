@@ -12,3 +12,19 @@ export const GET = async (req: NextRequest) => {
     });
     }
 
+export const DELETE = async (req: NextRequest) => {
+    const data = await req.json()
+    const user = await prisma.user.delete({
+        where: {
+            id: data.id
+        }
+    })
+    return new NextResponse(JSON.stringify({
+        message: "User deleted successfully",
+    }), {
+        status: 200,
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+    }
