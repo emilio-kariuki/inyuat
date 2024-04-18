@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const config = {
     images:{
-      domains: ["www.picsa.pro"],
+      remotePatterns:[
+        {
+          hostname:"www.picsa.pro"
+        }
+      ],
     }
   };
 

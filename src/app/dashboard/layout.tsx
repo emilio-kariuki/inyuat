@@ -68,8 +68,8 @@ export default function DashboardLayout({
 
 
   return (
-    <main className="bg-white mx-auto h-full  w-full max-w-7xl px-5 rounded-[15px] ">
-      <div className="sticky top-0 hidden h-20 items-center gap-3 py-5 md:flex">
+    <main className="mx-auto h-full min-h-screen w-full max-w-7xl px-5 md:pt-5 bg-white rounded-[10px]">
+      <div className="sticky top-0 hidden h-20 items-center gap-3 py-5 md:flex lg:flex">
         <span className="text-muted-foreground">Dashboard</span>
         <ChevronRightIcon className="text-muted-foreground h-5 w-5" />
         <span className="text-muted-foreground">
@@ -79,8 +79,8 @@ export default function DashboardLayout({
                 ?.title}
         </span>
       </div>
-      <div className="grid grid-cols-12">
-        <section className="col-span-3 hidden md:block">
+      <div className="grid grid-cols-12 ">
+        <section className="col-span-3 hidden md:block border-grey ">
           <div className="sticky top-20 flex flex-col space-y-2">
             {menuItems
               .map((item, idx) => (
@@ -102,7 +102,7 @@ export default function DashboardLayout({
               ))}
           </div>
         </section>
-        <section className="col-span-12 md:col-span-9 md:px-5">
+        <section className="col-span-12 md:col-span-9 ml-4">
           {children}
         </section>
       </div>
