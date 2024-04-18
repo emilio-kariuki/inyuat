@@ -13,7 +13,31 @@ export async function POST(request: Request){
                 name: payload.data.first_name,
             }
         })
+    }else if (payload.type === "user.updated"){
+        await prisma.user.update({
+            where: {
+                id: payload.data.id
+            },
+            data: {
+                email: payload.data.email_addresses[0].email_address,
+                name: payload.data.first_name,
+            }
+        })
+
+    }else if (payload.type === "user.deleted"){
+        await prisma.user.delete({
+            where: {
+                id: payload.data.id
+            }
+        })
     }
+
+    return new Response(JSON.stringify({message: "success"}), {
+        status: 200,
+        headers: {
+            "content-type": "application/json",
+        },
+    })
 }
 
 export async function GET(request: Request){
