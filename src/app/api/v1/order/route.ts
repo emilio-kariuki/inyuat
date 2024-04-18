@@ -1,17 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { currentUser } from "@clerk/nextjs/server";
+import { v1 as uuidv1 } from 'uuid';
+
+
 
 export const GET = async(req: NextRequest) => {
     try{
-        const orders = await prisma.order.findMany({
-            include: {
-                orderItems: true
-            },
-            orderBy: {
-                createdAt: 'asc'
-            }
-        })
+      const orders = await prisma.order.findMany({
+        include: {
+            orderItems: true
+        },
+        orderBy: {
+            createdAt: 'asc'
+        },
+        take: 10
+    })
         return new NextResponse(JSON.stringify(orders), {
             status: 200,
             headers: {
@@ -81,11 +85,12 @@ export const POST = async(req: NextRequest) => {
     // }
 
     try{
+      const id = uuidv1()
         const data = await req.json()
         const order = await prisma.order.create({
             data: {
-                id: data.id,
-                orderNumber: data.orderNumber,
+                id: id,
+                orderNumber: "ORD-" + id,
                 total: data.total,
                 address: data.address,
                 customerName: data.customerName,
@@ -101,9 +106,12 @@ export const POST = async(req: NextRequest) => {
                         image: item.image
                     }))
                 },
-                
-                
+                statusHistory: {
+                    create:  data.statusHistory.map((status: any) => ({
+                      status: status.status,
+                  }))
             }
+          }
         })
         return new NextResponse(JSON.stringify({
             message: "Order created successfully",
@@ -122,4 +130,24 @@ export const POST = async(req: NextRequest) => {
             },
           })
     }
+}
+
+export const DELETE = async(req: NextRequest) => {
+    const data = await req.json()
+    const order = await prisma.order.delete({
+        where: {
+            id: data.id
+        }
+    })
+
+    return new NextResponse(JSON.stringify({
+        message: "Order deleted successfully",
+    }), {
+        status: 200,
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+
+
 }

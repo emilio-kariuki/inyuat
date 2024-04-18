@@ -29,12 +29,13 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   // Order     Order[]
+  // Order     Order[]
 }
 
 model Order {
-  id            String       @id @unique @default(cuid())
+  id            String          @id @unique @default(cuid())
   orderNumber   String
-  status        OrderStatus  @default(PENDING)
+  status        OrderStatus     @default(PENDING)
   total         Float
   userId        String
   address       String
@@ -42,16 +43,17 @@ model Order {
   customerPhone String
   customerEmail String
   // user          User            @relation(fields: [userId], references: [id])
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   orderItems    OrderItems[]
+  statusHistory statusHistory[]
 }
 
 model statusHistory {
   id        String      @id @default(cuid())
   status    OrderStatus @default(PENDING)
   orderId   String
-  // order     Order       @relation(fields: [orderId], references: [id])
+  order     Order       @relation(fields: [orderId], references: [id],onDelete: Cascade, onUpdate: Cascade)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
 }
@@ -64,7 +66,7 @@ model OrderItems {
   orderId     String
   quantity    Int
   price       Float
-  order       Order    @relation(fields: [orderId], references: [id])
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

@@ -14,7 +14,7 @@ export async function POST(request: Request){
                 name: payload.data.first_name,
             }
         })
-       const response =  await axios.post("https://dashboard.inyuat.site/api/v1/emails", {
+       const response =  await axios.post("https://dashboard.inyuat.site/api/v1/email", {
             to: payload.data.email_addresses[0].email_address,
             subject: "Welcome to Inyuat",
             text: "Welcome to Inyuat, we are glad to have you on board"

@@ -20,6 +20,8 @@ import {
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
+
+
 const menuItems: {
   title: string;
   href: string;
@@ -66,10 +68,10 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const { push } = useRouter();
 
-
+  
 
   return (
-    <main className={`mx-auto h-full min-h-screen w-full max-w-[1300px]  bg-white rounded-[10px] ${inter.className}`}>
+    <main className={`mx-auto h-full min-h-screen w-full   bg-white rounded-[10px] ${inter.className}`}>
       <div className="sticky top-0 hidden  items-center gap-3 px-5 py-5 md:flex lg:flex border-b-[1px] border-gray-200">
         <span className="text-muted-foreground text-[14px]">Dashboard</span>
         <ChevronRightIcon className="text-muted-foreground h-3 w-5" />
@@ -81,7 +83,7 @@ export default function DashboardLayout({
         </span>
       </div>
       <div className="grid grid-cols-12 ">
-        <section className="col-span-3 hidden md:block border-r-[1px] border-gray-200 ">
+        <section className="col-span-2 hidden md:block border-r-[1px] border-gray-200 ">
           <div className="sticky top-20 flex flex-col space-y-2 p-5">
             {menuItems
               .map((item, idx) => (
@@ -89,7 +91,7 @@ export default function DashboardLayout({
                   key={item.title}
                   href={item.href}
                   className={cn(
-                    "hover:text-primary flex items-center space-x-3 rounded-md p-2 text-gray-600 transition-all hover:bg-green-100 md:w-[85%]",
+                    "hover:text-primary flex w-full items-center space-x-3  rounded-md p-3 text-gray-600 transition-all hover:bg-green-100 ",
                     pathname?.startsWith(item.href) &&
                       "text-primary bg-green-100 font-medium",
                     idx === 0 &&
@@ -98,12 +100,12 @@ export default function DashboardLayout({
                   )}
                 >
                   {item.icon({ className: "h-5 w-5" })}
-                  <span className="text-[14px]">{item.title}</span>
+                  <span className="text-[16px]">{item.title}</span>
                 </Link>
               ))}
           </div>
         </section>
-        <section className="col-span-12 md:col-span-9">
+        <section className="col-span-12 md:col-span-10">
           {children}
         </section>
       </div>

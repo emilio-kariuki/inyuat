@@ -1,4 +1,5 @@
-import { Plus } from "lucide-react";
+"use client"
+import { LoaderIcon, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     Table,
@@ -11,99 +12,31 @@ import {
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import type { Order, Prisma, PrismaClient } from "@prisma/client";
+import DashboardLayout from "../layout";
+import DashboardLoading from "../loading";
+import { useEffect } from "react";
+
+
+
+
+
 
 export default function Inventory() {
-    const orders = [
-        {
-            id: 1,
-            orderNumber: "ORD-0001",
-            createdAt: "2021-08-01T00:00:00.000Z",
-            status: "submitted",
-            total: 50000,
-            user: "Emilio Kariuki",
-            orderItems: [
-                {
-                    id: 1,
-                    name: "Milk",
-                    description: "Fresh milk from the farm",
-                    quantity: 2,
-                    price: 10000,
-                    image: "https://bit.ly/placeholder-img",
-                },
-                {
-                    id: 2,
-                    name: "Bread",
-                    description: "Fresh bread from the bakery",
-                    quantity: 1,
-                    price: 30000,
-                    image: "https://bit.ly/placeholder-img",
-                },
-            ],
+    const { data: orders , isFetching: isLoading } = useQuery<Order[]>({
+        queryKey: ["orders"],
+        queryFn: async () =>{
+            const { data } = await axios.get("/api/v1/order");
+            console.log(data);
+      return data as Order[];
         },
-        {
-            id: 2,
-            orderNumber: "ORD-0004",
-            createdAt: "2021-08-01T00:00:00.000Z",
-            status: "delivered",
-            total: 50000,
-            user: "Amanda Flavia",
-
-            orderItems: [
-                {
-                    id: 1,
-                    name: "Canned Milk",
-                    description: "Fresh milk from the farm",
-                    quantity: 2,
-                    price: 10000,
-                    image: "https://bit.ly/placeholder-img",
-                },
-                {
-                    id: 3,
-                    name: "Canned Yogurt",
-                    description: "Fresh milk from the farm",
-                    quantity: 2,
-                    price: 10000,
-                    image: "https://bit.ly/placeholder-img",
-                },
-                {
-                    id: 2,
-                    name: "Bread",
-                    description: "Fresh bread from the bakery",
-                    quantity: 1,
-                    price: 30000,
-                    image: "https://bit.ly/placeholder-img",
-                },
-            ],
-        },
-        {
-            id: 3,
-            orderNumber: "ORD-0005",
-            createdAt: "2021-08-01T00:00:00.000Z",
-            status: "cancelled",
-            total: 50000,
-            user: "Emilio kariuki",
-            orderItems: [
-                {
-                    id: 1,
-                    name: "Milk",
-                    description: "Fresh milk from the farm",
-                    quantity: 2,
-                    price: 10000,
-                    image: "https://bit.ly/placeholder-img",
-                },
-                {
-                    id: 2,
-                    name: "Bread",
-                    description: "Fresh bread from the bakery",
-                    quantity: 1,
-                    price: 30000,
-                    image: "https://bit.ly/placeholder-img",
-                },
-            ],
-        },
-    ];
-
+        staleTime: 6 * 1000,
+        
+    })
     return (
+        isLoading ? (<DashboardLoading />) : (
         <div className="flex flex-col h-full min-h-screen w-full items-start justify-start bg-white  p-[28px]">
             <div className=" w-full flex justify-between items-center mb-2">
                 <h1 className="text-[20px] font-semibold">
@@ -114,49 +47,50 @@ export default function Inventory() {
                     <h5 className="font-medium text-[13px] text-white">Add Order</h5>
                 </div>
             </div>
-            {orders.map((order, idx) => {
+            {orders?.map((order: any, idx: Number) => {
                 return (
-                    <div key={order.id} className="my-5 flex flex-col ">
-                        <section className="flex w-full flex-col items-center justify-between rounded-lg bg-gray-100/80 p-6 py-8 md:flex-row gap-16">
+                    <div key={order.id} className="my-5 flex flex-col flex-wrap w-full">
+                        <section className="flex  flex-col items-center justify-between rounded-lg bg-gray-100/80 p-6 py-8 md:flex-row ">
                             <div className="flex flex-col gap-0.5">
-                                <span className="text-muted-foreground text-sm">
+                                <span className="text-muted-foreground text-sm mb-2">
                                     Order Number
                                 </span>
                                 <span className="text-sm">{order.orderNumber}</span>
                             </div>
                             <div className="flex flex-col gap-0.5">
-                                <span className="text-muted-foreground text-sm">
+                                <span className="text-muted-foreground text-sm mb-2">
                                     Order Status
                                 </span>
                                 <span
                                     className={cn(
-                                        "inline-flex w-fit items-center justify-center rounded px-2 py-1 text-xs font-medium",
-                                        order.status === "submitted" &&
+                                        "inline-flex w-fit items-center justify-center rounded-[20px] px-4 py-2 text-[14px] font-medium",
+                                        (order.status).toLowerCase() === "pending" &&
                                         "bg-yellow-200 text-yellow-800",
-                                        order.status === "approved" &&
+                                        (order.status).toLowerCase() === "confirmed" &&
                                         "bg-green-200 text-green-800",
-                                        order.status === "cancelled" && "bg-red-200 text-red-800",
-                                        order.status === "delivered" && "bg-blue-200 text-blue-800"
+                                        (order.status).toLowerCase() === "shipped" && "bg-red-200 text-red-800",
+                                        (order.status).toLowerCase() === "delivered" && "bg-blue-200 text-blue-800",
+                                        (order.status).toLowerCase() === "cancelled" && "bg-gray-200 text-gray-800"
                                     )}
                                 >
-                                    {order.status}
+                                    {(order.status).toLowerCase()}
                                 </span>
                             </div>
                             <div className="flex flex-col gap-0.5">
-                                <span className="text-muted-foreground text-sm">Placed on</span>
+                                <span className="text-muted-foreground text-sm mb-2">Placed on</span>
                                 <span className="text-sm">
                                     {new Date(order.createdAt).toLocaleString()}
                                 </span>
                             </div>
 
                             <div className="flex flex-col gap-0.5">
-                                <span className="text-muted-foreground text-sm">Placed By</span>
+                                <span className="text-muted-foreground text-sm mb-2">Placed By</span>
                                 <span className="text-sm">
                                     {order.user}
                                 </span>
                             </div>
                             <div className="flex flex-col gap-0.5">
-                                <span className="text-muted-foreground text-sm">Total</span>
+                                <span className="text-muted-foreground text-sm mb-2">Total</span>
                                 <span className="text-sm">
                                     {Number(order.total).toLocaleString()}
                                 </span>
@@ -174,13 +108,14 @@ export default function Inventory() {
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="w-[300px]">Product</TableHead>
-                                    <TableHead>Unit Price</TableHead>
-                                    <TableHead>Quantity</TableHead>
+                                    <TableHead className="w-[150px]">Unit Price</TableHead>
+                                    <TableHead className="w-[150px]">Quantity</TableHead>
+                                    <TableHead >Description</TableHead>
                                     <TableHead className="text-right">Info</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {order.orderItems.map((item) => (
+                                {order.orderItems.map((item: any) => (
                                     <TableRow key={item.id}>
                                         <TableCell className="flex items-center gap-5 font-medium">
                                             <Image
@@ -195,6 +130,7 @@ export default function Inventory() {
                                         </TableCell>
                                         <TableCell>{item.price}</TableCell>
                                         <TableCell>{item.quantity}</TableCell>
+                                        <TableCell>{item.description}</TableCell>
                                         <TableCell className="text-right">
                                             <Link
                                                 href={`/products/${item.id}`}
@@ -210,8 +146,10 @@ export default function Inventory() {
                     </div>
                 );
             })}
-
-
+        
         </div>
+      )
+    
+        
     );
 }
