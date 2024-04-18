@@ -2,11 +2,11 @@ import { UserProfile } from "@clerk/nextjs";
 
 export default function Profile(){
     return (
-        <div className="">
+        <div className="bg-white border-none ">
       <UserProfile
         appearance={{
           elements: {
-            card: "shadow-none",
+            card: "shadow-none rounded-[1px]",
             navbar: "hidden",
             headerTitle: "scroll-m-20 text-xl font-medium text-green-900",
             headerSubtitle: "my-2 text-muted-foreground",

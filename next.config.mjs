@@ -4,6 +4,9 @@ const config = {
       remotePatterns:[
         {
           hostname:"www.picsa.pro"
+        },
+        {
+          hostname:"bit.ly"
         }
       ],
     }

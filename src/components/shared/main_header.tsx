@@ -12,11 +12,11 @@ export default function Header() {
   return (
     <nav
       className={cn(
-        "z-30 flex mn-w-[] px-3 w-full items-center bg-[#EDF3F2]",
+        "z-30 flex px-3 w-full items-center bg-[#EDF3F2]",
         "sticky top-0"
       )}
     >
-      <div className="mx-auto flex w-full max-w-[85rem] items-center justify-between py-6 md:py-3 lg:py-3">
+      <div className="mx-auto flex w-full max-w-[85rem] items-center justify-between py-6 md:py-3 lg:py-1">
         <Logo />
 
         <MobileMenu />
