@@ -11,7 +11,6 @@ export async function POST(request: Request){
                 id: payload.data.id,
                 email: payload.data.email_addresses[0].email_address,
                 name: payload.data.first_name + " " + payload.data.last_name,
-                phone: payload.data.phone_numbers[0].phone_number
             }
         })
     }
