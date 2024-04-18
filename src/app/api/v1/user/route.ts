@@ -1,14 +1,12 @@
 import { NextResponse, NextRequest } from "next/server";
 
 export const GET = async (req: NextRequest) => {
-    return new NextResponse("Hello world");
+    const users = await prisma.user.findMany();
+    return new NextResponse(JSON.stringify(users), {
+        status: 200,
+        headers: {
+            "content-type": "application/json",
+        },
+    });
     }
 
-export const POST = async (req: NextRequest) => {
-
-    const data = await req.json();
-    console.log(data);
-
-    return new NextResponse("Hello world");
-
-}

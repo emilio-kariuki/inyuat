@@ -1,8 +1,20 @@
 import { WebhookEvent } from "@clerk/nextjs/server";
 
+
 export async function POST(request: Request){
     const payload: WebhookEvent = await request.json();
-    console.log(payload)
+    // user created
+    if(payload.type === "user.created"){
+        await prisma.user.create({
+            data: {
+                id: payload.data.id,
+                email: payload.data.email_addresses[0].email_address,
+                firstName: payload.data.first_name,
+                lastName: payload.data.last_name,
+                phone: payload.data.phone_numbers[0].phone_number
+            }
+        })
+    }
 }
 
 export async function GET(request: Request){
