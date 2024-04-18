@@ -1,6 +1,9 @@
+"use client"
 import { SignIn } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 
 export default function Page() {
+  const pathName = usePathname();
   return (
     <div className="flex h-full min-h-screen w-full items-center justify-center bg-gray-100">
       <SignIn
@@ -13,6 +16,7 @@ export default function Page() {
               "text-[#38B279] hover:text-[#38B279] hover:underline",
           },
         }}
+        afterSignInUrl={pathName === "/sign-in" ? "/dashboard" : "/dashboard"}
       />
     </div>
   );

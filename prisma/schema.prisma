@@ -13,11 +13,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
   name      String?
-  password  String
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Order     Order[]
+}
+
+model Order {
+  id            String          @id @default(cuid())
+  orderNumber   String
+  status        OrderStatus     @default(PENDING)
+  total         Float
+  userId        String
+  address      String
+  customerName String
+  customerPhone String
+  customerEmail String
+
+  user          User            @relation(fields: [userId], references: [id])
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  statusHistory statusHistory[]
+  OrderItems    OrderItems[]
+}
+
+model statusHistory {
+  id        String   @id @default(cuid())
+  status    String
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model OrderItems {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  image       String
+  orderId     String
+  quantity    Int
+  price       Float
+  order       Order    @relation(fields: [orderId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+

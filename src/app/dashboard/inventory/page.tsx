@@ -162,9 +162,13 @@ export default function Inventory() {
                                     {Number(order.total).toLocaleString()}
                                 </span>
                             </div>
-                            <Button variant="outline" className="w-fit">
+
+                            <Link
+                                href={`/orders/${order.id}`}
+                                className="text-primary"
+                            >
                                 View Order
-                            </Button>
+                            </Link>
                         </section>
                         <Table>
                             <TableHeader>

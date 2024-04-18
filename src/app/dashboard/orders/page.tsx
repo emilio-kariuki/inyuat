@@ -82,7 +82,6 @@ export default function Inventory() {
             status: "cancelled",
             total: 50000,
             user: "Emilio kariuki",
-
             orderItems: [
                 {
                     id: 1,
@@ -117,7 +116,7 @@ export default function Inventory() {
             </div>
             {orders.map((order, idx) => {
                 return (
-                    <div key={order.id} className="my-5 flex flex-col">
+                    <div key={order.id} className="my-5 flex flex-col ">
                         <section className="flex w-full flex-col items-center justify-between rounded-lg bg-gray-100/80 p-6 py-8 md:flex-row gap-16">
                             <div className="flex flex-col gap-0.5">
                                 <span className="text-muted-foreground text-sm">
@@ -162,8 +161,13 @@ export default function Inventory() {
                                     {Number(order.total).toLocaleString()}
                                 </span>
                             </div>
-                            <Button variant="outline" className="w-fit">
-                                View Order
+                            <Button variant="outline" className="w-fit" >
+                                <Link
+                                    href={`/dashboard/orders/${order.id}`}
+                                    className="text-primary "
+                                >
+                                    View Order
+                                </Link>
                             </Button>
                         </section>
                         <Table>
