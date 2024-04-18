@@ -56,13 +56,14 @@ export function RouteSection() {
       path: "products",
     },
     {
-      name: "Contact",
-      path: "contact",
-    },
-    {
       name: "FAQ",
       path: "faq",
     },
+    {
+      name: "Contact",
+      path: "contact",
+    },
+    
   ];
   return (
     <div className="flex  gap-5">
