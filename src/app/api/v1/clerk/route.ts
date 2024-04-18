@@ -10,8 +10,7 @@ export async function POST(request: Request){
             data: {
                 id: payload.data.id,
                 email: payload.data.email_addresses[0].email_address,
-                firstName: payload.data.first_name,
-                lastName: payload.data.last_name,
+                name: payload.data.first_name + " " + payload.data.last_name,
                 phone: payload.data.phone_numbers[0].phone_number
             }
         })
