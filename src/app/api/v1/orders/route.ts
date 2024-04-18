@@ -7,6 +7,9 @@ export const GET = async(req: NextRequest) => {
         const orders = await prisma.order.findMany({
             include: {
                 orderItems: true
+            },
+            orderBy: {
+                createdAt: 'asc'
             }
         })
         return new NextResponse(JSON.stringify(orders), {
@@ -26,6 +29,42 @@ export const GET = async(req: NextRequest) => {
           })
     }
 };
+
+/*
+// sample request body
+{
+  "id": "ab",
+  "orderNumber": "ORD-004",
+  "status": "PENDING",
+  "total": 50000,
+  "userId": "user_2fFCGzNRYICKaMrwP1mgYkGwKwJ",
+  "address": "Nairobi, Kenya",
+  "customerName": "Amanda Flavia",
+  "customerPhone": "+254796250443",
+  "customerEmail": "amanda@inyuat.site",
+  "orderItems": [
+    {
+      "id": "1234",
+      "name": "Peas",
+      "description": "Cartons of peas",
+      "image": "www.picsa.pro/profile.jpg",
+      "orderId": "ab",
+      "quantity": 10,
+      "price": 10000
+    },
+    {
+      "id": "12345",
+      "name": "Peas",
+      "description": "Cartons of peas",
+      "image": "www.picsa.pro/profile.jpg",
+      "orderId": "ab",
+      "quantity": 10,
+      "price": 10000
+    }
+  ]
+
+}
+*/
 
 export const POST = async(req: NextRequest) => {
     // const user = await currentUser();

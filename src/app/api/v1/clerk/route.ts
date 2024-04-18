@@ -1,5 +1,6 @@
 import { WebhookEvent } from "@clerk/nextjs/server";
 import prisma from "@/lib/db";
+import axios from "axios";
 
 
 export async function POST(request: Request){
@@ -13,6 +14,12 @@ export async function POST(request: Request){
                 name: payload.data.first_name,
             }
         })
+        await axios.post("/api/v1/emails", {
+            to: payload.data.email_addresses[0].email_address,
+            subject: "Welcome to Clerk",
+            text: "Welcome to Clerk"
+        })
+
     }else if (payload.type === "user.updated"){
         await prisma.user.update({
             where: {

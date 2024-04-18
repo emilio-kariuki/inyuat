@@ -21,6 +21,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@tremor/react": "^3.16.0",
     "@types/react-scroll": "^1.8.10",
+    "axios": "^1.6.8",
     "carousel": "^0.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -36,6 +37,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.1",
     "react-scroll": "^1.8.0",
+    "resend": "^3.2.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"
