@@ -1,4 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
+ import prisma from "@/lib/db";
 //* update order status
 /*
 id: string;
