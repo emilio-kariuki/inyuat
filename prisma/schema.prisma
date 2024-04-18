@@ -28,34 +28,32 @@ model User {
   phone     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Order     Order[]
+  // Order     Order[]
 }
 
 model Order {
-  id            String          @id @default(cuid())
+  id            String       @id @unique @default(cuid())
   orderNumber   String
-  status        OrderStatus     @default(PENDING)
+  status        OrderStatus  @default(PENDING)
   total         Float
   userId        String
-  address      String
-  customerName String
+  address       String
+  customerName  String
   customerPhone String
   customerEmail String
-
-  user          User            @relation(fields: [userId], references: [id])
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  statusHistory statusHistory[]
-  OrderItems    OrderItems[]
+  // user          User            @relation(fields: [userId], references: [id])
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  orderItems    OrderItems[]
 }
 
 model statusHistory {
-  id        String   @id @default(cuid())
-  status    String
+  id        String      @id @default(cuid())
+  status    OrderStatus @default(PENDING)
   orderId   String
-  order     Order    @relation(fields: [orderId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  // order     Order       @relation(fields: [orderId], references: [id])
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 }
 
 model OrderItems {
@@ -70,4 +68,3 @@ model OrderItems {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
-

@@ -46,10 +46,11 @@ export default function OrderPage() {
                 </h1>
             </div>
 
-            <h2 className="text-[14px] text-black font-bold">
+            <div className="mb-10">
+            <h2 className="text-[13px] text-black font-medium">
                 Order ID #{order.id}
             </h2>
-            <h2 className="text-[12px] text--[#E4E4E4] font-medium">
+            <h2 className="text-[11px] text-[#a4a4a4] font-normal mt-1">
                 {new Date(order.createdAt).toLocaleString()}
             </h2>
             <div>
@@ -67,15 +68,10 @@ export default function OrderPage() {
                     {order.status}
                 </span>
             </div>
-
-            {/* Customer section */}
-            <div className="flex flex-row gap-2">
-                <div className="flex items-center justify-center rounded-full h-12 w-12 bg-gray-50 ">
-                    <UserRound className="h-6 w-6 " size={23} />
-                </div>
-                <div></div>
             </div>
 
+            {/* Customer section */}
+           
         </div>
     )
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { inter } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
 import {
@@ -68,7 +69,7 @@ export default function DashboardLayout({
 
 
   return (
-    <main className="mx-auto h-full min-h-screen w-full max-w-[1300px]  bg-white rounded-[10px]">
+    <main className={`mx-auto h-full min-h-screen w-full max-w-[1300px]  bg-white rounded-[10px] ${inter.className}`}>
       <div className="sticky top-0 hidden  items-center gap-3 px-5 py-5 md:flex lg:flex border-b-[1px] border-gray-200">
         <span className="text-muted-foreground text-[14px]">Dashboard</span>
         <ChevronRightIcon className="text-muted-foreground h-3 w-5" />
