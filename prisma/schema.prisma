@@ -22,8 +22,8 @@ enum QUALITY {
 model User {
   id        String      @id @default(cuid())
   email     String      @unique
-  name      String
-  phone     String      @unique
+  name      String?
+  phone     String?     @unique
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   Inventory Inventory[]

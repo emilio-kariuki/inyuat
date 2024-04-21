@@ -11,7 +11,7 @@ export async function POST(request: Request){
             data: {
                 id: payload.data.id,
                 email: payload.data.email_addresses[0].email_address,
-                name: payload.data.first_name,
+                name: payload.data.first_name
             }
         })
        const response =  await axios.post("https://dashboard.inyuat.site/api/v1/email", {
