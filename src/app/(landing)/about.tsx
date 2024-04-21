@@ -97,8 +97,8 @@ function ServiceContainer({ ...props }) {
           props.index == 0
             ? "bg-[#30B877]"
             : props.index == 1
-            ? "bg-[#367BE0]"
-            : "bg-[#FFDD04]"
+              ? "bg-[#367BE0]"
+              : "bg-[#FFDD04]"
         }  p-6`}
       >
         <BookText size={25} color={props.index == 2 ? "#000000" : "#ffffff"} />

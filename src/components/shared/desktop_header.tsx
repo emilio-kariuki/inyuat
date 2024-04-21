@@ -13,13 +13,22 @@ export default function DesktopMenu() {
       <RouteSection />
       {/* <ContactButton /> */}
       <SignedOut>
-        <ContactButton title="Get Started" icon={<LogIn color="#ffffff" className="h-[18px] w-[18px]" />} href={"/sign-in"}/>
+        <ContactButton
+          title="Get Started"
+          icon={<LogIn color="#ffffff" className="h-[18px] w-[18px]" />}
+          href={"/sign-in"}
+        />
       </SignedOut>
-      <SignedIn >
-        <ContactButton title="Dashboard" icon={<LayoutDashboard color="#ffffff" className="h-[18px] w-[18px]"/>}  href={"dashboard"} />
+      <SignedIn>
+        <ContactButton
+          title="Dashboard"
+          icon={
+            <LayoutDashboard color="#ffffff" className="h-[18px] w-[18px]" />
+          }
+          href={"dashboard"}
+        />
         <div className="w-2"></div>
         <UserButton showName />
-        
       </SignedIn>
     </div>
   );
@@ -46,7 +55,7 @@ export function RouteSection() {
       name: "Home",
       path: "hero",
     },
-   
+
     {
       name: "About",
       path: "about",
@@ -63,7 +72,6 @@ export function RouteSection() {
       name: "Contact",
       path: "contact",
     },
-    
   ];
   return (
     <div className="flex  gap-5">
@@ -93,25 +101,22 @@ export function RouteSection() {
 }
 
 export function ContactButton({
-  title ,
-  icon ,
-  href 
-}:{
+  title,
+  icon,
+  href,
+}: {
   title: string;
   icon: JSX.Element;
   href: string;
-
-})  {
+}) {
   return (
-    <Link
-    href={href}
-    >
-    <div className="flex bg-green-800 rounded-[13px] py-[15px] px-[20px] gap-4 items-center hover:bg-green-700 ml-20">
-      {icon}
-      <h5 className="font-medium text-[14px] text-white">{title}</h5>
-      
-      {/* <Mail color="#ffffff" className="h-[18px] w-[18px] " /> */}
-    </div>
+    <Link href={href}>
+      <div className="flex bg-green-800 rounded-[13px] py-[15px] px-[20px] gap-4 items-center hover:bg-green-700 ml-20">
+        {icon}
+        <h5 className="font-medium text-[14px] text-white">{title}</h5>
+
+        {/* <Mail color="#ffffff" className="h-[18px] w-[18px] " /> */}
+      </div>
     </Link>
   );
 }

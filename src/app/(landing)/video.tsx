@@ -81,14 +81,14 @@ function TestimonyContainer({ ...props }) {
     <div className="bg-slate-200 p-4 border-4  rounded-[30px] mt-20">
       <div className="relative w-full">
         <div className="relative lg:h-[300px]  md:h-[200px] h-[200px]">
-        <Image
-          className=" w-full blur rounded-[30px] object-cover  "
-          alt="image"
-          // width={500}
-          // height={20}
-          fill
-          src={props.image}
-        />
+          <Image
+            className=" w-full blur rounded-[30px] object-cover  "
+            alt="image"
+            // width={500}
+            // height={20}
+            fill
+            src={props.image}
+          />
         </div>
 
         <div className="flex flex-row justify-between absolute top-2 m-4 w-full pr-8">

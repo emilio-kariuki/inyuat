@@ -13,7 +13,7 @@ export default function Header() {
     <nav
       className={cn(
         "z-30 flex px-3 w-full items-center bg-[#EDF3F2]",
-        "sticky top-0"
+        "sticky top-0",
       )}
     >
       <div className="mx-auto flex w-full max-w-[85rem] items-center justify-between py-6 md:py-3 lg:py-1">

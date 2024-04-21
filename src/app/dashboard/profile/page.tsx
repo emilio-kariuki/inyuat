@@ -1,8 +1,8 @@
 import { UserProfile } from "@clerk/nextjs";
 
-export default function Profile(){
-    return (
-        <div className="bg-white border-none ">
+export default function Profile() {
+  return (
+    <div className="bg-white border-none ">
       <UserProfile
         appearance={{
           elements: {
@@ -22,5 +22,5 @@ export default function Profile(){
         }}
       />
     </div>
-    );
+  );
 }
