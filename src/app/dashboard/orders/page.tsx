@@ -17,24 +17,34 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import type { Order, Prisma, PrismaClient } from "@prisma/client";
 import DashboardLayout from "../layout";
 import DashboardLoading from "../loading";
-import { useEffect } from "react";
-
-
-
-
-
+import { useEffect, useState } from "react";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+  } from "@/components/ui/pagination"
 
 export default function Inventory() {
+    const [currentPage, setCurrentPage] = useState(1);
+ const pageSize = 10;
+ const changePage = (page: number) => {
+    setCurrentPage(page);
+    }
+
     const { data: orders , isFetching: isLoading } = useQuery<Order[]>({
         queryKey: ["orders"],
         queryFn: async () =>{
-            const { data } = await axios.get("/api/v1/order");
+            const { data } = await axios.get("/api/v1/order?page=" + 3);
             console.log(data);
-      return data as Order[];
+            return data as Order[];
         },
         staleTime: 6 * 1000,
-        
-    })
+    });
+
     return (
         isLoading ? (<DashboardLoading />) : (
         <div className="flex flex-col h-full min-h-screen w-full items-start justify-start bg-white  p-[28px]">
@@ -42,6 +52,23 @@ export default function Inventory() {
                 <h1 className="text-[20px] font-semibold">
                     Orders
                 </h1>
+                <Pagination className="w-fit">
+      <PaginationContent>
+        
+        {
+            Array.from({ length: 10 }).map((_, i) => (
+                <PaginationItem key={i}>
+                <PaginationLink onClick={
+                    () => setCurrentPage(i + 1)
+                } isActive={currentPage === i + 1}>
+                    {i + 1}
+                </PaginationLink>
+                </PaginationItem>
+            ))
+        }
+        
+      </PaginationContent>
+    </Pagination>
                 <div className="flex bg-green-800 rounded-[10px] py-[13px] px-[20px] gap-2 items-center hover:bg-green-700 ml-20">
                     <Plus color="#ffffff" className="h-[18px] w-[18px]" />
                     <h5 className="font-medium text-[13px] text-white">Add Order</h5>
@@ -50,7 +77,7 @@ export default function Inventory() {
             {orders?.map((order: any, idx: Number) => {
                 return (
                     <div key={order.id} className="my-5 flex flex-col flex-wrap w-full">
-                        <section className="flex  flex-col items-center justify-between rounded-lg bg-gray-100/80 p-6 py-8 md:flex-row ">
+                        <section className="flex  flex-col items-center justify-between rounded-lg bg-gray-100/80 p-6 py-5 md:flex-row ">
                             <div className="flex flex-col gap-0.5">
                                 <span className="text-muted-foreground text-sm mb-2">
                                     Order Number
@@ -122,9 +149,9 @@ export default function Inventory() {
                                                 src={item.image}
                                                 alt={item.name}
                                                 width={50}
-                                                height={50}
+                                                height={30}
                                                 style={{ objectFit: "cover" }}
-                                                className="aspect-1 rounded-md"
+                                                className="aspect-1 rounded-[200px] h-[50px] w-[50px]"
                                             />
                                             {item.name}
                                         </TableCell>

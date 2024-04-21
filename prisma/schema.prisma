@@ -13,60 +13,54 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum OrderStatus {
-  PENDING
-  CONFIRMED
-  SHIPPED
-  DELIVERED
-  CANCELLED
+enum QUALITY {
+  GOOD
+  FAIR
+  REJECT
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  phone     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  // Order     Order[]
-  // Order     Order[]
-}
-
-model Order {
-  id            String          @id @unique @default(cuid())
-  orderNumber   String
-  status        OrderStatus     @default(PENDING)
-  total         Float
-  userId        String
-  address       String
-  customerName  String
-  customerPhone String
-  customerEmail String
-  // user          User            @relation(fields: [userId], references: [id])
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  orderItems    OrderItems[]
-  statusHistory statusHistory[]
-}
-
-model statusHistory {
   id        String      @id @default(cuid())
-  status    OrderStatus @default(PENDING)
-  orderId   String
-  order     Order       @relation(fields: [orderId], references: [id],onDelete: Cascade, onUpdate: Cascade)
+  email     String      @unique
+  name      String
+  phone     String      @unique
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
+  Inventory Inventory[]
 }
 
-model OrderItems {
-  id          String   @id @default(cuid())
+model Inventory {
+  id              String    @id @unique @default(cuid())
+  inventoryNumber String
+  total           Float
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  supplierId      String
+  supplier        Supplier  @relation(fields: [supplierId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  quantity        Float
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  product         Product[]
+}
+
+model Product {
+  id          String    @id @default(cuid())
   name        String
+  quantity    String
+  quality     QUALITY   @default(GOOD)
   description String
-  image       String
-  orderId     String
-  quantity    Int
-  price       Float
-  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  inventoryId String
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Supplier {
+  id        String      @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  inventory Inventory[]
 }

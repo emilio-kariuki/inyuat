@@ -6,17 +6,21 @@ import { v1 as uuidv1 } from 'uuid';
 
 
 export const GET = async(req: NextRequest) => {
+
     try{
-      const orders = await prisma.order.findMany({
+      const pages = req.nextUrl.searchParams.get("page");
+      const inventory = await prisma.inventory.findMany({
+        take: 5,
+        skip: Number(pages) > 1 ? (Number(pages) - 1) * 5 : 0,
         include: {
             orderItems: true
         },
         orderBy: {
             createdAt: 'asc'
         },
-        take: 10
+        
     })
-        return new NextResponse(JSON.stringify(orders), {
+        return new NextResponse(JSON.stringify(inventory), {
             status: 200,
             headers: {
               "content-type": "application/json",
@@ -37,36 +41,29 @@ export const GET = async(req: NextRequest) => {
 /*
 // sample request body
 {
-  "id": "ab",
-  "orderNumber": "ORD-004",
-  "status": "PENDING",
+  "inventoryNumber": "INV-2fFCGzNRYICKaMrwP1mgYkGwKwJ",
   "total": 50000,
   "userId": "user_2fFCGzNRYICKaMrwP1mgYkGwKwJ",
-  "address": "Nairobi, Kenya",
-  "customerName": "Amanda Flavia",
-  "customerPhone": "+254796250443",
-  "customerEmail": "amanda@inyuat.site",
-  "orderItems": [
+  "supplierId": "SUPP_2fFCGzNRYICKaMrwP1mgYkGwKwJ",
+  "quantity": 20,
+  "product": [
     {
-      "id": "1234",
       "name": "Peas",
-      "description": "Cartons of peas",
-      "image": "www.picsa.pro/profile.jpg",
-      "orderId": "ab",
       "quantity": 10,
+      "quality": "Good",
+      "description": "Cartons of peas",
+      "image": "https://www.picsa.pro/profile.jpg",
+      
       "price": 10000
     },
     {
-      "id": "12345",
       "name": "Peas",
       "description": "Cartons of peas",
-      "image": "www.picsa.pro/profile.jpg",
-      "orderId": "ab",
+      "image": "https://www.picsa.pro/profile.jpg",
       "quantity": 10,
       "price": 10000
     }
   ]
-
 }
 */
 
@@ -87,34 +84,26 @@ export const POST = async(req: NextRequest) => {
     try{
       const id = uuidv1()
         const data = await req.json()
-        const order = await prisma.order.create({
+        const inventory = await prisma.inventory.create({
             data: {
                 id: id,
-                orderNumber: "ORD-" + id,
+                inventoryNumber: "INV-" + id,
                 total: data.total,
-                address: data.address,
-                customerName: data.customerName,
-                customerEmail: data.customerEmail,
-                customerPhone: data.customerPhone,
+                supplierId: data.supplierId,
                 userId: data.userId,
-                orderItems: {
-                    create: data.orderItems.map((item: any) => ({
+                quantity: data.quantity,
+                product: {
+                    create: data.products.map((item: any) => ({
                         name: item.name,
-                        description: item.description,
                         quantity: item.quantity,
-                        price: item.price,
-                        image: item.image
+                        quality: item.quality,
+                        description: item.description
                     }))
-                },
-                statusHistory: {
-                    create:  data.statusHistory.map((status: any) => ({
-                      status: status.status,
-                  }))
-            }
+                },  
           }
         })
         return new NextResponse(JSON.stringify({
-            message: "Order created successfully",
+            message: "Inventory added successfully",
         }), {
             status: 201,
             headers: {
@@ -126,7 +115,7 @@ export const POST = async(req: NextRequest) => {
         return new NextResponse(e, {
             status: 500,
             headers: {
-              "content-type": "text/plain",
+              "content-type": "application/json",
             },
           })
     }
@@ -134,14 +123,14 @@ export const POST = async(req: NextRequest) => {
 
 export const DELETE = async(req: NextRequest) => {
     const data = await req.json()
-    const order = await prisma.order.delete({
+    const inventory = await prisma.inventory.delete({
         where: {
             id: data.id
         }
     })
 
     return new NextResponse(JSON.stringify({
-        message: "Order deleted successfully",
+        message: "Inventory deleted successfully",
     }), {
         status: 200,
         headers: {
