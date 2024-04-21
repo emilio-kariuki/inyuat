@@ -1,26 +1,28 @@
-export interface Order {
+export interface Inventory {
     id:            string;
-    orderNumber:   string;
-    status:        string;
+    inventoryNumber:   string;
     total:         number;
     userId:        string;
-    address:       string;
-    customerName:  string;
-    customerPhone: string;
-    customerEmail: string;
+    supplierId:     string;
+    quantity:      number;
     createdAt:     Date;
     updatedAt:     Date;
-    orderItems:    OrderItem[];
+    product:    Product[];
 }
 
-export interface OrderItem {
+export interface Product {
     id:          string;
     name:        string;
-    description: string;
-    image:       string;
-    orderId:     string;
     quantity:    number;
-    price:       number;
+    quanlity:    QUALITY;
+    description: string;
+    inventoryId: string;
     createdAt:   Date;
     updatedAt:   Date;
+}
+
+enum QUALITY {
+    GOOD = "GOOD",
+    FAIR = "FAIR",
+    REJECT = "REJECT"
 }

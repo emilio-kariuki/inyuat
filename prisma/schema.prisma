@@ -38,6 +38,7 @@ model Inventory {
   supplierId      String
   supplier        Supplier  @relation(fields: [supplierId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   quantity        Float
+  deliveryNote    String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   product         Product[]
@@ -48,7 +49,7 @@ model Product {
   name        String
   quantity    String
   quality     QUALITY   @default(GOOD)
-  description String
+  description String?
   inventoryId String
   inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt   DateTime  @default(now())

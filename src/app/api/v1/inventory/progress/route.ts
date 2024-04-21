@@ -7,12 +7,12 @@ status
 */
 export const PUT = async (req: NextRequest) => {
     const data = await req.json()
-    const order = await prisma.order.update({
+    const order = await prisma.inventory.update({
         where: {
             id: data.id
         },
         data: {
-            status: data.status
+            quantity: data.status
         }
     })
     return new NextResponse(JSON.stringify({

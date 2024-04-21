@@ -13,7 +13,7 @@ export const GET = async(req: NextRequest) => {
         take: 5,
         skip: Number(pages) > 1 ? (Number(pages) - 1) * 5 : 0,
         include: {
-            orderItems: true
+            product: true
         },
         orderBy: {
             createdAt: 'asc'

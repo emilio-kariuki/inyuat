@@ -14,7 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import type { Order, Prisma, PrismaClient } from "@prisma/client";
+import type { Inventory, Prisma, PrismaClient } from "@prisma/client";
 import DashboardLayout from "../layout";
 import DashboardLoading from "../loading";
 import { useEffect, useState } from "react";
@@ -35,12 +35,12 @@ export default function Inventory() {
     setCurrentPage(page);
     }
 
-    const { data: orders , isFetching: isLoading } = useQuery<Order[]>({
+    const { data: orders , isFetching: isLoading } = useQuery<Inventory[]>({
         queryKey: ["orders"],
         queryFn: async () =>{
             const { data } = await axios.get("/api/v1/order?page=" + 3);
             console.log(data);
-            return data as Order[];
+            return data as Inventory[];
         },
         staleTime: 6 * 1000,
     });

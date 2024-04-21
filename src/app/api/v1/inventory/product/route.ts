@@ -3,14 +3,12 @@ import prisma from "@/lib/db";
 
 export const PUT = async(req: NextRequest) =>{
     const data = await req.json();
-    const item = await prisma.orderItems.update({
+    const item = await prisma.product.update({
         where: {
-            id:data.id,
-            orderId: data.orderId
+            id: data.id
         },
-        data: {
-            image: data.image,
-        }
-    });
+        ...data
+    
+    })
     return new NextResponse(JSON.stringify(item));
 }

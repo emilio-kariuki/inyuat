@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "pnpx prisma generate && next build",
     "dev": "next dev",
     "lint": "next lint",
     "clean": "next clean",
