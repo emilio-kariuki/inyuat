@@ -31,6 +31,7 @@ import {
 export default function Inventory() {
     const [currentPage, setCurrentPage] = useState(1);
  const pageSize = 10;
+ 
  const changePage = (page: number) => {
     setCurrentPage(page);
     }
