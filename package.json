@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "pnpx prisma generate && next build",
-    "dev": "next dev",
+    "dev": "next dev ",
     "lint": "next lint",
     "clean": "next clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

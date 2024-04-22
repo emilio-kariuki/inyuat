@@ -171,7 +171,7 @@ export function CarouselSize() {
             className="lg:basis-1/3 md:basis-1/3 sm:basis-1/2"
           >
             <div className="p-1">
-              <Card className="bg-[#E3E7EB] border-[0.1px] border-[#e9e9e9]">
+              <Card className="bg-[#F4F5FB] border-[0.1px] border-[#e9e9e9]">
                 <ProductCard product={product} />
               </Card>
             </div>

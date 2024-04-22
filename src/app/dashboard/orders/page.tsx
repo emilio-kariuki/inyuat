@@ -1,4 +1,5 @@
 "use client";
+
 import { LoaderIcon, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +17,6 @@ import axios from "axios";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import type { Inventory, Prisma, PrismaClient } from "@prisma/client";
 import DashboardLayout from "../layout";
-import DashboardLoading from "../loading";
 import { useEffect, useState } from "react";
 import {
   Pagination,
@@ -27,6 +27,15 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+
+
+function DashboardLoading() {
+    return (
+      <div className="mt-60 flex h-full w-full items-center justify-center">
+        <LoaderIcon className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
 
 export default function Inventory() {
   const [currentPage, setCurrentPage] = useState(1);

@@ -3,7 +3,7 @@
 import { QUALITY, Supplier, Product } from "@prisma/client";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Check, ChevronLeft, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronLeft, ChevronsUpDown, LoaderIcon } from "lucide-react";
 import {
   Command,
   CommandEmpty,
@@ -36,6 +36,14 @@ import { useUser } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { Button } from "@/components/ui/button";
+
+function DashboardLoading() {
+  return (
+    <div className="mt-60 flex h-full w-full items-center justify-center">
+      <LoaderIcon className="h-8 w-8 animate-spin" />
+    </div>
+  );
+}
 
 const formSchema = z.object({
   id: z.string().cuid(),
@@ -74,7 +82,7 @@ const quality = [
   },
 ];
 
-export default async function OrderCreate() {
+export default function OrderCreate() {
   const user = useUser();
   const id = uuidv1();
   const inventoryNumber = `INV-${id}`;
@@ -126,22 +134,22 @@ export default async function OrderCreate() {
   });
 
   return (
-    <main className="flex flex-col h-full min-h-screen w-full items-start justify-start bg-[#F4F5FB] p-[28px]">
-      <div className="flex flex-row gap-4 items-center justify-center mb-5">
+    <main className="flex flex-col h-full min-h-screen w-full items-start justify-start bg-white p-[28px]">
+      <div className="flex flex-row gap-4 items-center justify-center mb-2">
         <Link href="/dashboard/orders">
           <ChevronLeft className="h-6 w-6 text-gray-500" />
         </Link>
         <h1 className="text-[20px] font-semibold">Add Inventory</h1>
       </div>
 
-      <div className=" p-[24px] w-full items-start justify-start bg-white rounded-[30px] ">
+      <div className=" p-[30px] w-full items-start justify-start bg-white rounded-[30px] ">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className=" flex mx-auto w-full"
           >
             <div className="flex flex-col w-full space-y-5">
-              <div className="flex flex-row w-full gap-10">
+              <div className="flex flex-row w-full gap-20">
                 <FormField
                   control={form.control}
                   name="id"
@@ -179,52 +187,62 @@ export default async function OrderCreate() {
                 />
               </div>
 
-              <div className="flex flex-row w-full gap-10">
+              <div className="flex flex-row w-full gap-20">
                 <div className="flex flex-col w-full gap-[10px]">
                   <label className="w-full font-medium text-[14px]">
                     Select Quality
                   </label>
                   <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-full justify-between py-6"
-        >
-          {value
-            ? quality.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
-        <Command>
-          <CommandInput placeholder="Search framework..." />
-          <CommandEmpty>No framework found.</CommandEmpty>
-          <CommandGroup>
-            {quality.map((framework) => (
-              <CommandItem
-                key={framework.value}
-                value={framework.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue)
-                  setOpen(false)
-                }}
-              >
-                <Check
-                  className={cn(
-                    "mr-2 h-4 w-4",
-                    value === framework.value ? "opacity-100" : "opacity-0"
-                  )}
-                />
-                {framework.label}
-              </CommandItem>
-            ))}
-          </CommandGroup>
-        </Command>
-      </PopoverContent>
-    </Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        size={"sm"}
+                        role="combobox"
+                        aria-expanded={open}
+                        aria-label="Select Department"
+                        className="w-full justify-between dark:text-white py-6"
+                      >
+                        {value
+                          ? quality.find(
+                              (framework) => framework.value === value
+                            )?.label
+                          : "Select quality"}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-full p-0">
+                      <Command className="w-full">
+                        <CommandInput placeholder="Search quality..." />
+                        <CommandList>
+                          <CommandEmpty>No quality found.</CommandEmpty>
+                          <CommandGroup>
+                            {quality.map((framework) => (
+                              <CommandItem
+                                key={framework.value}
+                                value={framework.value}
+                                onSelect={(currentValue) => {
+                                  setValue(
+                                    currentValue === value ? "" : currentValue
+                                  );
+                                  setOpen(false);
+                                }}
+                              >
+                                <Check
+                                  className={cn(
+                                    "mr-2 h-4 w-4",
+                                    value === framework.value
+                                      ? "opacity-100"
+                                      : "opacity-0"
+                                  )}
+                                />
+                                {framework.label}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
                 </div>
                 <FormField
                   control={form.control}
@@ -247,6 +265,47 @@ export default async function OrderCreate() {
             </div>
           </form>
         </Form>
+      </div>
+      {/* add product section */}
+      <div className="flex flex-col h-full min-h-screen w-full items-start justify-start bg-white p-[28px]">
+        <h1 className="text-[16px] font-semibold mb-5">Add Product</h1>
+        <div className="flex flex-row w-full gap-20">
+          <FormField
+            control={form.control}
+            name="deliveryNote"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Delivery Note</FormLabel>
+                <FormControl>
+                  <Input
+                    className="flex w-full py-6"
+                    placeholder="Delivery Note"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="id"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Inventory Number</FormLabel>
+                <FormControl>
+                  <Input
+                    className="flex w-full py-6"
+                    placeholder="inventory number"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
       </div>
     </main>
   );

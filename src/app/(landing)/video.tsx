@@ -78,7 +78,7 @@ export default function VideoSection() {
 
 function TestimonyContainer({ ...props }) {
   return (
-    <div className="bg-slate-200 p-4 border-4  rounded-[30px] mt-20">
+    <div className="bg-[#F4F5FB] p-4 border-2  rounded-[30px] mt-20">
       <div className="relative w-full">
         <div className="relative lg:h-[300px]  md:h-[200px] h-[200px]">
           <Image
