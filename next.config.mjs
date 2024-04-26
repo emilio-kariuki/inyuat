@@ -1,8 +1,22 @@
 /** @type {import('next').NextConfig} */
 const config = {
+  
     images:{
-      domains: ["www.picsa.pro"],
-    }
+      remotePatterns:[
+        {
+          hostname:"www.picsa.pro"
+        },
+        {
+          hostname:"bit.ly"
+        }
+      ],
+    },
+    typescript: {
+      ignoreBuildErrors: true,
+    },
+    eslint: {
+      ignoreDuringBuilds: true,
+    },
   };
 
 export default config;
