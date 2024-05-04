@@ -266,47 +266,7 @@ export default function OrderCreate() {
           </form>
         </Form>
       </div>
-      {/* add product section */}
-      <div className="flex flex-col h-full min-h-screen w-full items-start justify-start bg-white p-[28px]">
-        <h1 className="text-[16px] font-semibold mb-5">Add Product</h1>
-        <div className="flex flex-row w-full gap-20">
-          <FormField
-            control={form.control}
-            name="deliveryNote"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Delivery Note</FormLabel>
-                <FormControl>
-                  <Input
-                    className="flex w-full py-6"
-                    placeholder="Delivery Note"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <FormField
-            control={form.control}
-            name="id"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Inventory Number</FormLabel>
-                <FormControl>
-                  <Input
-                    className="flex w-full py-6"
-                    placeholder="inventory number"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-      </div>
     </main>
   );
 }
