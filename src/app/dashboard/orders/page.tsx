@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import { LoaderIcon, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +14,6 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import type { Inventory, Prisma, PrismaClient } from "@prisma/client";
 import DashboardLayout from "../layout";
 import { useEffect, useState } from "react";
 import {
@@ -27,30 +25,27 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-
+import { Order, orders } from "@/db/schema";
+import { getOrders } from "@/lib/actions/orders.actions";
+import { db } from "@/db/drizzle";
 
 function DashboardLoading() {
-    return (
-      <div className="mt-60 flex h-full w-full items-center justify-center">
-        <LoaderIcon className="h-8 w-8 animate-spin" />
-      </div>
-    );
-  }
+  return (
+    <div className="mt-60 flex h-full w-full items-center justify-center">
+      <LoaderIcon className="h-8 w-8 animate-spin" />
+    </div>
+  );
+}
 
 export default function Inventory() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
 
-  const changePage = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const { data: inventories, isFetching: isLoading } = useQuery<Inventory[]>({
-    queryKey: ["inventory"],
+  const { data: order, isFetching: isLoading } = useQuery<Order[]>({
+    queryKey: ["orders"],
     queryFn: async () => {
-      const { data } = await axios.get("/api/v1/inventory?page=" + 1);
-      console.log(data);
-      return data as Inventory[];
+      const order = await db.select().from(orders)
+      console.log("orders", order);
+      
+      return order as Order[];
     },
     staleTime: 6 * 1000,
   });
@@ -65,12 +60,7 @@ export default function Inventory() {
           <PaginationContent>
             {Array.from({ length: 10 }).map((_, i) => (
               <PaginationItem key={i}>
-                <PaginationLink
-                  onClick={() => setCurrentPage(i + 1)}
-                  isActive={currentPage === i + 1}
-                >
-                  {i + 1}
-                </PaginationLink>
+                {/* <PaginationLink>{i + 1}</PaginationLink> */}
               </PaginationItem>
             ))}
           </PaginationContent>
@@ -85,7 +75,7 @@ export default function Inventory() {
         </Link>
       </div>
 
-      {inventories?.map((order: any, idx: Number) => {
+      {order?.map((order: any, idx: Number) => {
         return (
           <div key={order.id} className="my-5 flex flex-col flex-wrap w-full">
             <section className="flex  flex-col items-center justify-between rounded-lg bg-gray-100/80 p-6 py-5 md:flex-row ">
@@ -93,7 +83,7 @@ export default function Inventory() {
                 <span className="text-muted-foreground text-sm mb-2">
                   Order Number
                 </span>
-                <span className="text-sm">{order.inventoryNumber}</span>
+                <span className="text-sm">{order.orderNumber}</span>
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="text-muted-foreground text-sm mb-2">
@@ -104,7 +94,7 @@ export default function Inventory() {
                     "inline-flex w-fit items-center justify-center rounded-[20px] px-4 py-2 text-[14px] font-medium",
                     order.quality === "GOOD" && "bg-yellow-200 text-yellow-800",
                     order.quality === "FAIR" && "bg-green-200 text-green-800",
-                    order.quality === "REJECT" && "bg-red-200 text-red-800",
+                    order.quality === "REJECT" && "bg-red-200 text-red-800"
                   )}
                 >
                   {order.quality}
