@@ -1,12 +1,12 @@
-import { type Config } from "drizzle-kit";
-
-
-
-export default {
-  schema: "./src/server/db/schema.ts",
-  driver: "pg",
+import { type Config } from 'drizzle-kit'
+export default ({
+  schema: "./src/db/schema.ts",
+  dialect: 'postgresql',
+  out: "./drizzle",
   dbCredentials: {
-    connectionString: process.env.POSTGRES_URL!,
+    url: process.env.DATABASE_URL!,
   },
-  tablesFilter: ["inyuat_*"],
-} satisfies Config;
+  verbose: true,
+  strict: true,
+  tablesFilter: ["inyuat_*"]
+}) satisfies Config

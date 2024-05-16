@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS "inyuat_orders" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" text PRIMARY KEY DEFAULT 'fbeb1181-139b-11ef-8d83-556b5d750f94' NOT NULL,
 	"orderNumber" text,
 	"total" double precision,
+	"quality" text DEFAULT 'GOOD' NOT NULL,
+	"products" json[] DEFAULT ,
 	"userId" text NOT NULL,
 	"supplierId" text NOT NULL,
 	"quantity" integer,
@@ -12,17 +14,20 @@ CREATE TABLE IF NOT EXISTS "inyuat_orders" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "inyuat_products" (
-	"id" text PRIMARY KEY DEFAULT 'cuid()' NOT NULL,
-	"name" text,
-	"email" text,
-	"phone" text,
-	"inventoryId" text NOT NULL,
+	"id" text PRIMARY KEY DEFAULT 'PRD_fbeb3890-139b-11ef-8d83-556b5d750f94' NOT NULL,
+	"name" text NOT NULL,
+	"description" text,
+	"image" text DEFAULT 'https://picsa.pro/profile.jpg',
+	"price" double precision DEFAULT 0,
+	"quantity" integer DEFAULT 0,
+	"quality" text DEFAULT 'GOOD' NOT NULL,
+	"orderId" text NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
 	"updatedAt" timestamp DEFAULT CURRENT_TIMESTAMP
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "inyuat_suppliers" (
-	"id" text PRIMARY KEY DEFAULT 'cuid()' NOT NULL,
+	"id" text PRIMARY KEY DEFAULT 'SUPP_fbeb3891-139b-11ef-8d83-556b5d750f94' NOT NULL,
 	"name" text,
 	"email" text,
 	"phone" text,
@@ -31,7 +36,7 @@ CREATE TABLE IF NOT EXISTS "inyuat_suppliers" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "inyuat_users" (
-	"id" text PRIMARY KEY DEFAULT 'cuid()' NOT NULL,
+	"id" text PRIMARY KEY DEFAULT 'USR_fbeb1180-139b-11ef-8d83-556b5d750f94' NOT NULL,
 	"email" text,
 	"phone" varchar(256),
 	"name" varchar(256),
@@ -53,7 +58,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "inyuat_products" ADD CONSTRAINT "inyuat_products_inventoryId_inyuat_orders_id_fk" FOREIGN KEY ("inventoryId") REFERENCES "public"."inyuat_orders"("id") ON DELETE cascade ON UPDATE cascade;
+ ALTER TABLE "inyuat_products" ADD CONSTRAINT "inyuat_products_orderId_inyuat_orders_id_fk" FOREIGN KEY ("orderId") REFERENCES "public"."inyuat_orders"("id") ON DELETE cascade ON UPDATE cascade;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

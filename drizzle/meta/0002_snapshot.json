@@ -1,6 +1,6 @@
 {
-  "id": "076235d4-4954-40e8-bbe7-d5760fd8661b",
-  "prevId": "1a2f4345-46b8-4463-82d6-b72f72dcb235",
+  "id": "4e6e7aca-0813-469f-ab28-71658e6fe7ff",
+  "prevId": "076235d4-4954-40e8-bbe7-d5760fd8661b",
   "version": "6",
   "dialect": "postgresql",
   "tables": {
@@ -13,7 +13,7 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'13ec3d90-139c-11ef-8132-754fffb802ca'"
+          "default": "'73d6af10-139c-11ef-b573-4540c71efab3'"
         },
         "orderNumber": {
           "name": "orderNumber",
@@ -36,10 +36,10 @@
         },
         "products": {
           "name": "products",
-          "type": "json",
+          "type": "jsonb",
           "primaryKey": false,
           "notNull": false,
-          "default": "'[]'::json"
+          "default": "'[]'::jsonb"
         },
         "userId": {
           "name": "userId",
@@ -129,7 +129,7 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'PRD_13ec3d91-139c-11ef-8132-754fffb802ca'"
+          "default": "'PRD_73d6af11-139c-11ef-b573-4540c71efab3'"
         },
         "name": {
           "name": "name",
@@ -220,7 +220,7 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'SUPP_13ec3d92-139c-11ef-8132-754fffb802ca'"
+          "default": "'SUPP_73d6d620-139c-11ef-b573-4540c71efab3'"
         },
         "name": {
           "name": "name",
@@ -269,7 +269,7 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'USR_13ec1680-139c-11ef-8132-754fffb802ca'"
+          "default": "'USR_73d68800-139c-11ef-b573-4540c71efab3'"
         },
         "email": {
           "name": "email",

@@ -1,6 +1,6 @@
 "use server"
-import { db } from "@/db/drizzle";
-import { NewUser, orders, users } from "@/db/schema";
+import { db } from "@/db";
+import { NewUser, Supplier, orders, suppliers, users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export const getUser = async (id: string) => {
@@ -20,6 +20,18 @@ export const getUsers = async () => {
     console.log("An error occurred while fetching users", error);
   }
 };
+
+export const getSuppliers = async () => {
+  try {
+    const user = await db.query.suppliers.findMany();
+    return user;
+  } catch (error) {
+    console.log("An error occurred while fetching users", error);
+  }
+};
+
+
+
 
 export const getUserOrders = async (userId: string) => {
   try {
@@ -45,5 +57,22 @@ export const createUser = async (user: NewUser) => {
       });
   } catch (error) {
     console.log("An error occurred while creating user", error);
+  }
+};
+
+
+export const createSupplier = async (supplier: any) => {
+  console.log("supplier", supplier);
+  try {
+    return await db
+      .insert(suppliers)
+      .values(supplier)
+      .returning()
+      .onConflictDoUpdate({
+        target: [suppliers.id],
+        set: supplier,
+      });
+  } catch (error) {
+    console.log("An error occurred while creating supplier", error);
   }
 };

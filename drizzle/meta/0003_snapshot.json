@@ -1,6 +1,6 @@
 {
-  "id": "076235d4-4954-40e8-bbe7-d5760fd8661b",
-  "prevId": "1a2f4345-46b8-4463-82d6-b72f72dcb235",
+  "id": "da15bdee-1942-454d-a76f-1e9ed4ee0bdf",
+  "prevId": "4e6e7aca-0813-469f-ab28-71658e6fe7ff",
   "version": "6",
   "dialect": "postgresql",
   "tables": {
@@ -13,7 +13,7 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'13ec3d90-139c-11ef-8132-754fffb802ca'"
+          "default": "'22f693f0-13b8-11ef-836a-539d4b33cb54'"
         },
         "orderNumber": {
           "name": "orderNumber",
@@ -36,10 +36,10 @@
         },
         "products": {
           "name": "products",
-          "type": "json",
+          "type": "jsonb",
           "primaryKey": false,
           "notNull": false,
-          "default": "'[]'::json"
+          "default": "'[]'::jsonb"
         },
         "userId": {
           "name": "userId",
@@ -129,7 +129,7 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'PRD_13ec3d91-139c-11ef-8132-754fffb802ca'"
+          "default": "'PRD_22f693f1-13b8-11ef-836a-539d4b33cb54'"
         },
         "name": {
           "name": "name",
@@ -164,12 +164,26 @@
           "notNull": false,
           "default": 0
         },
-        "quality": {
-          "name": "quality",
-          "type": "text",
+        "good": {
+          "name": "good",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'GOOD'"
+          "notNull": false,
+          "default": 0
+        },
+        "fair": {
+          "name": "fair",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "reject": {
+          "name": "reject",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
         },
         "orderId": {
           "name": "orderId",
@@ -220,7 +234,7 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'SUPP_13ec3d92-139c-11ef-8132-754fffb802ca'"
+          "default": "'SUPP_22f6bb00-13b8-11ef-836a-539d4b33cb54'"
         },
         "name": {
           "name": "name",
@@ -269,7 +283,7 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'USR_13ec1680-139c-11ef-8132-754fffb802ca'"
+          "default": "'USR_22f66ce0-13b8-11ef-836a-539d4b33cb54'"
         },
         "email": {
           "name": "email",

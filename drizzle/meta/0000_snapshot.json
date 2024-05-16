@@ -1,5 +1,5 @@
 {
-  "id": "991434d6-5fa0-4f7c-9537-9e5ff68f8086",
+  "id": "1a2f4345-46b8-4463-82d6-b72f72dcb235",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "6",
   "dialect": "postgresql",
@@ -10,9 +10,10 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "text",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "'fbeb1181-139b-11ef-8d83-556b5d750f94'"
         },
         "orderNumber": {
           "name": "orderNumber",
@@ -25,6 +26,20 @@
           "type": "double precision",
           "primaryKey": false,
           "notNull": false
+        },
+        "quality": {
+          "name": "quality",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'GOOD'"
+        },
+        "products": {
+          "name": "products",
+          "type": "json[]",
+          "primaryKey": false,
+          "notNull": false,
+          "default": []
         },
         "userId": {
           "name": "userId",
@@ -114,28 +129,50 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'cuid()'"
+          "default": "'PRD_fbeb3890-139b-11ef-8d83-556b5d750f94'"
         },
         "name": {
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
-        "email": {
-          "name": "email",
+        "description": {
+          "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "phone": {
-          "name": "phone",
+        "image": {
+          "name": "image",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "'https://picsa.pro/profile.jpg'"
         },
-        "inventoryId": {
-          "name": "inventoryId",
+        "price": {
+          "name": "price",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "quality": {
+          "name": "quality",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'GOOD'"
+        },
+        "orderId": {
+          "name": "orderId",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -157,12 +194,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "inyuat_products_inventoryId_inyuat_orders_id_fk": {
-          "name": "inyuat_products_inventoryId_inyuat_orders_id_fk",
+        "inyuat_products_orderId_inyuat_orders_id_fk": {
+          "name": "inyuat_products_orderId_inyuat_orders_id_fk",
           "tableFrom": "inyuat_products",
           "tableTo": "inyuat_orders",
           "columnsFrom": [
-            "inventoryId"
+            "orderId"
           ],
           "columnsTo": [
             "id"
@@ -183,7 +220,7 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'cuid()'"
+          "default": "'SUPP_fbeb3891-139b-11ef-8d83-556b5d750f94'"
         },
         "name": {
           "name": "name",
@@ -232,7 +269,7 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
-          "default": "'cuid()'"
+          "default": "'USR_fbeb1180-139b-11ef-8d83-556b5d750f94'"
         },
         "email": {
           "name": "email",

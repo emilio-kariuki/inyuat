@@ -1,14 +1,14 @@
-"use server"
+"use server";
 
-import { db } from "@/db/drizzle";
+import { db } from "@/db";
 import { type NewOrder, type Order, orders, users } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 export const getOrders = async () => {
   try {
     const result = await db.query.orders.findMany({
       with: {
-        product: true,
+        user: true,
       },
     });
     return result;
@@ -17,11 +17,28 @@ export const getOrders = async () => {
   }
 };
 
-export const createOrder = async (order: NewOrder) => {
+export const getOrderById = async (id: string) => {
+  try {
+    const result = await db.query.orders.findFirst({
+      where: (order, { eq }) => eq(order.id, id),
+      with: {
+        user: true,
+      },
+    });
+    return result;
+  } catch (error) {
+    console.log("An error occurred while fetching order", error);
+  }
+};
+export const createOrder = async (order: any) => {
+  console.log("order", order);
+
   try {
     return await db
       .insert(orders)
-      .values(order)
+      .values({
+        ...order,
+      })
       .returning()
       .onConflictDoUpdate({
         target: [orders.id],

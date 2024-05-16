@@ -1,6 +1,6 @@
-"use server"
+"use server";
 
-import { db } from "@/db/drizzle";
+import { db } from "@/db";
 import { Product, products } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
@@ -16,16 +16,9 @@ export const getOrderProducts = async (orderId: string) => {
   }
 };
 
-export const createProduct = async (product: Product) => {
+export const createProduct = async (product: Product[]) => {
   try {
-    return await db
-      .insert(products)
-      .values(product)
-      .returning()
-      .onConflictDoUpdate({
-        target: [products.id],
-        set: product,
-      });
+    return await db.insert(products).values(product).returning();
   } catch (error) {
     console.log("An error occurred while creating product", error);
   }
@@ -53,5 +46,3 @@ export const deleteProduct = async (product: Product) => {
     console.log("An error occurred while deleting product", error);
   }
 };
-
-

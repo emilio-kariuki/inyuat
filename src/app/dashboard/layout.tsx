@@ -4,6 +4,7 @@ import { inter } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
 import {
+  AlignCenterVertical,
   BellIcon,
   ChevronRightIcon,
   CogIcon,
@@ -15,7 +16,6 @@ import {
   ShoppingBagIcon,
   StoreIcon,
   Users2Icon,
-  AlignCenterVertical,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -25,37 +25,37 @@ const menuItems: {
   href: string;
   icon: (p: LucideProps) => JSX.Element;
 }[] = [
-  {
-    title: "Home",
-    href: "/dashboard",
-    icon: (p: LucideProps) => <LayoutGridIcon {...p} />,
-  },
-  {
-    title: "Orders",
-    href: "/dashboard/orders",
-    icon: (p: LucideProps) => <ShoppingBagIcon {...p} />,
-  },
-  {
-    title: "Invoices",
-    href: "/dashboard/invoices",
-    icon: (p: LucideProps) => <StoreIcon {...p} />,
-  },
-  {
-    title: "Inventory",
-    href: "/dashboard/inventory",
-    icon: (p: LucideProps) => <AlignCenterVertical {...p} />,
-  },
-  {
-    title: "Profile & Settings",
-    href: "/dashboard/profile",
-    icon: (p: LucideProps) => <CogIcon {...p} />,
-  },
-  {
-    title: "Recent Items",
-    href: "/dashboard/recent",
-    icon: (p: LucideProps) => <HistoryIcon {...p} />,
-  },
-];
+    {
+      title: "Home",
+      href: "/dashboard",
+      icon: (p: LucideProps) => <LayoutGridIcon {...p} />,
+    },
+    {
+      title: "Orders",
+      href: "/dashboard/orders",
+      icon: (p: LucideProps) => <ShoppingBagIcon {...p} />,
+    },
+    {
+      title: "Invoices",
+      href: "/dashboard/invoices",
+      icon: (p: LucideProps) => <StoreIcon {...p} />,
+    },
+    {
+      title: "Inventory",
+      href: "/dashboard/inventory",
+      icon: (p: LucideProps) => <AlignCenterVertical {...p} />,
+    },
+    {
+      title: "Profile & Settings",
+      href: "/dashboard/profile",
+      icon: (p: LucideProps) => <CogIcon {...p} />,
+    },
+    {
+      title: "Recent Items",
+      href: "/dashboard/recent",
+      icon: (p: LucideProps) => <HistoryIcon {...p} />,
+    },
+  ];
 
 export default function DashboardLayout({
   children,
@@ -63,20 +63,16 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const { push } = useRouter();
 
   return (
     <main
-      className={`mx-auto h-full min-h-screen w-full   bg-white rounded-[10px] ${inter.className}`}
+      className={`mx-auto h-full min-h-screen w-full bg-white rounded-[10px] ${inter.className}`}
     >
       <div className="sticky top-0 hidden  items-center gap-3 px-5 py-5 md:flex lg:flex border-b-[1px] border-gray-200">
         <span className="text-muted-foreground text-[14px]">Dashboard</span>
         <ChevronRightIcon className="text-muted-foreground h-3 w-5" />
         <span className="text-muted-foreground text-[14px]">
-          {pathname === "/dashboard"
-            ? "Home"
-            : menuItems.slice(1).find((item) => pathname?.startsWith(item.href))
-                ?.title}
+          {menuItems.find((item) => pathname.startsWith(item.href))?.title}
         </span>
       </div>
       <div className="grid grid-cols-12 ">
@@ -89,10 +85,10 @@ export default function DashboardLayout({
                 className={cn(
                   "hover:text-primary flex w-full items-center space-x-3  rounded-md p-3 text-gray-600 transition-all hover:bg-green-100 ",
                   pathname?.startsWith(item.href) &&
-                    "text-primary bg-green-100 font-medium",
+                  "text-primary bg-green-100 font-medium",
                   idx === 0 &&
-                    pathname !== "/dashboard" &&
-                    "bg-transparent font-normal text-gray-600",
+                  pathname !== "/dashboard" &&
+                  "bg-transparent font-normal text-gray-600",
                 )}
               >
                 {item.icon({ className: "h-5 w-5" })}
@@ -111,10 +107,10 @@ export default function DashboardLayout({
             className={cn(
               "hover:text-primary rounded-md p-2 text-gray-600 transition-all hover:bg-gray-100",
               pathname?.startsWith(item.href) &&
-                "text-primary bg-gray-100 font-medium",
+              "text-primary bg-gray-100 font-medium",
               idx === 0 &&
-                pathname !== "/dashboard" &&
-                "bg-transparent font-normal text-gray-600",
+              pathname !== "/dashboard" &&
+              "bg-transparent font-normal text-gray-600",
             )}
           >
             {item.icon({ className: "h-5 w-5" })}
