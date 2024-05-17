@@ -22,24 +22,18 @@ import {
 } from "@/components/ui/pagination";
 import { Order, Product, orders } from "@/db/schema";
 import { getOrders } from "@/lib/actions/orders.actions";
+import UserText from "../(dashboard)/components/user_text";
 
 export default async function Inventory() {
   const results = await getOrders();
 
   return (
     <div className="flex flex-col h-full min-h-screen w-full items-start justify-start bg-white  p-[28px]">
+      <UserText text="Here are the list of inventories."/>
       <div className=" w-full flex justify-between items-center mb-2">
+      
         <h1 className="text-[20px] font-semibold">Inventories</h1>
-        <Pagination className="w-fit">
-          <PaginationContent>
-            {Array.from({ length: 10 }).map((_, i) => (
-              <PaginationItem key={i}>
-                {/* <PaginationLink>{i + 1}</PaginationLink> */}
-              </PaginationItem>
-            ))}
-          </PaginationContent>
-        </Pagination>
-
+       
         <Link
           href="/dashboard/orders/add"
           className="flex bg-green-800 rounded-[10px] py-[13px] px-[20px] gap-2 items-center hover:bg-green-700 ml-20"
@@ -105,7 +99,6 @@ export default async function Inventory() {
                 <TableHead className="w-[300px]">Good</TableHead>
                 <TableHead className="w-[300px]">Fair</TableHead>
                 <TableHead className="w-[300px]">Reject</TableHead>
-                <TableHead className="w-[300px]">Quantity</TableHead>
                 <TableHead className="w-[300px]">Description</TableHead>
                   <TableHead className="text-right">Info</TableHead>
                 </TableRow>
@@ -124,10 +117,6 @@ export default async function Inventory() {
                   </TableCell>
                   <TableCell className="text-black w-[300px]">
                     {item.reject} boxes 
-                  </TableCell>
-
-                  <TableCell className="text-black w-[300px]">
-                    {item.quantity} boxes 
                   </TableCell>
                   <TableCell className="text-black w-[300px]">
                     {item.description}

@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import copy from "clipboard-copy";
-import { Clipboard, CheckCheck } from "lucide-react";
+import {  CheckCheck, Copy } from "lucide-react";
 
 const CopyClipboard = ({ text }: { text: string }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -18,8 +18,8 @@ const CopyClipboard = ({ text }: { text: string }) => {
     }
   };
   return (
-    <div onClick={handleCopyClick}>
-      {isCopied ? <CheckCheck size={16} color="#4C4C4C" /> : <Clipboard size={16} color="#4C4C4C" />}
+    <div className="bg-[#F5F6F7] rounded-full p-3" onClick={handleCopyClick}>
+      {isCopied ? <CheckCheck size={13} color="#4C4C4C" /> : <Copy size={13} color="#4C4C4C" />}
     </div>
   );
 };

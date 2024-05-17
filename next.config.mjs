@@ -4,10 +4,16 @@ const config = {
     images:{
       remotePatterns:[
         {
-          hostname:"www.picsa.pro"
+          hostname:"www.picsa.pro",
         },
         {
           hostname:"bit.ly"
+        },
+        {
+          hostname:"picsa.pro"
+        },
+        {
+          hostname:"utfs.io"
         }
       ],
     },

@@ -83,16 +83,16 @@ export default function DashboardLayout({
                 key={item.title}
                 href={item.href}
                 className={cn(
-                  "hover:text-primary flex w-full items-center space-x-3  rounded-md p-3 text-gray-600 transition-all hover:bg-green-100 ",
+                  "hover:text-primary flex w-full items-center space-x-3  rounded-md p-3 text-gray-600 transition-all hover:bg-[#F5F6F7] ",
                   pathname?.startsWith(item.href) &&
-                  "text-primary bg-green-100 font-medium",
+                  "text-primary bg-[#F5F6F7] font-medium",
                   idx === 0 &&
                   pathname !== "/dashboard" &&
                   "bg-transparent font-normal text-gray-600",
                 )}
               >
-                {item.icon({ className: "h-5 w-5" })}
-                <span className="text-[16px]">{item.title}</span>
+                {item.icon({ className: "h-4 w-4" })}
+                <span className="text-[14px] font-normal">{item.title}</span>
               </Link>
             ))}
           </div>

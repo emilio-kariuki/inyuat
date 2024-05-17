@@ -7,6 +7,7 @@ import { inter } from "@/lib/fonts";
 import Header from "@/components/shared/main_header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from "@/lib/provider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Inyuat Farm Fresh",
@@ -25,6 +26,7 @@ export default function RootLayout({
           <body className={`bg-[#EDF3F2] ${inter.className}`}>
             <Header />
             <main>{children}</main>
+            <Toaster />
           </body>
         </html>
       </Providers>

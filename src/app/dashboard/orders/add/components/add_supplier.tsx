@@ -4,11 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import OrderForm from "./order_form";
-import { Form } from "../ui/form";
 import { LoaderIcon } from "lucide-react";
 import { v1 as uuidv1 } from "uuid";
 import short from "short-uuid";
+import { Form } from "@/components/ui/form";
+import OrderForm from "./order_form";
 
 const formSupplierSchema = z.object({
   id: z.string().startsWith("SUPP_"),
@@ -74,7 +74,7 @@ const AddSupplier = () => {
       </Form>
       <div
         onClick={supplierForm.handleSubmit(onSubmit)}
-        className="flex bg-green-800 rounded-[10px] py-[10px] px-[30px] gap-2 items-center justify-center hover:bg-green-700 mt-5 mx-5"
+        className="flex bg-green-800 rounded-[30px] py-[10px] px-[30px] gap-2 items-center justify-center hover:bg-green-700 mt-5 mx-5"
       >
         {Loading ? (
           <LoaderIcon className="h-5 w-8 animate-spin" color="#ffffff" />

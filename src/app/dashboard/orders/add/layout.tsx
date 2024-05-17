@@ -1,4 +1,4 @@
-import SuppliersSection from "@/components/shared/suppliers_section";
+import SuppliersSection from "./components/suppliers_section";
 
 export default function OrdersLayout({
   children,
