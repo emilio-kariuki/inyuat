@@ -16,7 +16,10 @@ export default function Page() {
               "text-[#38B279] hover:text-[#38B279] hover:underline",
           },
         }}
-        afterSignInUrl={pathName === "/sign-in" ? "/dashboard" : "/dashboard"}
+        // afterSignInUrl={"https://dashboard.inyuat.site"}
+        // afterSignUpUrl={"https://dashboard.inyuat.site"}
+        // afterSignOutUrl={"https://dashboard.inyuat.site"}
+        // afterSignInUrl={pathName === "/sign-in" ? "https://dashboard.inyuat.site" : "/dashboard"}
       />
     </div>
   );

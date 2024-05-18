@@ -7,11 +7,19 @@ import { Link as Scroll } from "react-scroll";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { User } from "@clerk/nextjs/server";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 export default function DesktopMenu() {
+  const pathname = usePathname();
   return (
-    <div className=" hidden lg:flex  md:flex items-center mx-[30px] my-[20px] justify-between bg-[#EDF3F2] ">
-      <RouteSection />
-      {/* <ContactButton /> */}
+    <div
+      className={cn(
+        " hidden lg:flex  md:flex items-center mx-[30px] my-[20px] justify-between ",
+        pathname.includes("dashboard") ? "bg-white" : "bg-[#EDF3F2]"
+      )}
+    >
+      {<RouteSection />}
+
       <SignedOut>
         <ContactButton
           title="Get Started"
@@ -19,24 +27,35 @@ export default function DesktopMenu() {
           href={"/sign-in"}
         />
       </SignedOut>
-      <SignedIn>
-        <ContactButton
-          title="Dashboard"
-          icon={
-            <LayoutDashboard color="#ffffff" className="h-[18px] w-[18px]" />
-          }
-          href={"dashboard"}
-        />
-        <div className="w-2"></div>
-        <UserButton showName />
-      </SignedIn>
+
+      {pathname.includes("dashboard") ? (
+        <div className="ml-20">
+          <UserButton showName />
+        </div>
+      ) : (
+        <SignedIn>
+          <ContactButton
+            title="Dashboard"
+            icon={
+              <LayoutDashboard color="#ffffff" className="h-[18px] w-[18px]" />
+            }
+            href={"dashboard"}
+          />
+          <div className="w-2"></div>
+        </SignedIn>
+      )}
     </div>
   );
 }
 
 export function Logo() {
   return (
-    <div className="flex items-center">
+    <div
+      className="flex items-center"
+      onClick={() => {
+        window.location.href = "/";
+      }}
+    >
       <Image
         src={logo}
         alt="logo"
@@ -72,11 +91,24 @@ export function RouteSection() {
       name: "Contact",
       path: "contact",
     },
+    {
+      name: "Dashboard",
+      path: "dashboard",
+    },
   ];
   return (
     <div className="flex  gap-5">
       {routes.map((route, index) => {
-        return (
+        return route.name === "Dashboard" ? (
+          <Link key={index} href={`${route.path}`}>
+            <div
+              key={index}
+              className=" hover:bg-green-800 px-5 py-2 rounded-[40px] hover:text-white"
+            >
+              <h2 className="font-medium hover:text-white">{route.name}</h2>
+            </div>
+          </Link>
+        ) : (
           <Scroll
             className="font-medium hover:text-white"
             activeClass="active"
