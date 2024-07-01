@@ -1,10 +1,15 @@
 import { type Config } from 'drizzle-kit'
 export default ({
-  schema: "./src/db/schema.ts",
+  schema: "./src/middlewares/schema.ts",
   dialect: 'postgresql',
   out: "./drizzle",
   dbCredentials: {
-    url: process.env.DATABASE_URL!,
+    user: "postgres",
+    password: "ecoville",
+    host: "84.247.174.84",
+    port: 5800,
+    database: "inyuatdb",
+    ssl: false,
   },
   verbose: true,
   strict: true,

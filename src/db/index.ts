@@ -1,17 +1,15 @@
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
-
+import { pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 import * as schema from "./schema";
 
-/**
- * Cache the database connection in development. This avoids creating a new connection on every HMR
- * update.
- */
-const globalForDb = globalThis as unknown as {
-  conn: postgres.Sql | undefined;
-};
+const pool = new Pool({
+  host: "84.247.174.84",
+  port: 5800,
+  user: "postgres",
+  password: "ecoville",
+  database: "inyuatdb",
+  keepAlive: true,
+});
 
-const conn = globalForDb.conn ?? postgres(process.env.DATABASE_URL!);
-if (process.env.NODE_ENV !== "production") globalForDb.conn = conn;
-
-export const db = drizzle(conn, { schema });
+export const db = drizzle(pool, {schema});
