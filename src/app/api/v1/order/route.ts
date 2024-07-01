@@ -1,9 +1,7 @@
-import { getOrders } from "@/lib/actions/orders.actions";
 import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest) => {
   try {
-    const order = await getOrders();
-    return new NextResponse(JSON.stringify(order), {
+    return new NextResponse(JSON.stringify("dfs"), {
       status: 200,
       headers: {
         "content-type": "application/json",
