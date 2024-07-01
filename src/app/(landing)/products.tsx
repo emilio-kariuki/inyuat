@@ -78,7 +78,7 @@ const products = [
 export function ProductSection() {
   return (
     <Element name="products">
-      <section className="relative px-1 py-20 bg-black-100 mx-5 md:mx-20 lg:mx-40">
+      <section className="relative px-1 py-10 bg-black-100 mx-5 md:mx-20 lg:mx-40">
         <div className="flex  w-full flex-col justify-center items-center ">
           {/* <h1
           className={`max-w-[600px] text-4xl font-bold text-slate text-center ${monasans.className} mb-10`}

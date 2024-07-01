@@ -1,14 +1,11 @@
 "use client";
-import { ChevronLeft, LoaderIcon, Save } from "lucide-react";
-import Link from "next/link";
+import { ChevronLeft, LoaderIcon, Save, X } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { v1 as uuidv1 } from "uuid";
 import { useUser } from "@clerk/nextjs";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Product } from "@/db/schema";
 import {
   Table,
   TableBody,
@@ -18,54 +15,33 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
-import { createOrder } from "@/lib/actions/orders.actions";
-import { createProduct } from "@/lib/actions/product.actions";
-import { Form, FormLabel } from "@/components/ui/form";
-import short from "short-uuid";
 import { useRouter } from "next/navigation";
 import { SimpleUploadButton } from "./components/upload_button";
 import { toast } from "sonner";
-import { Numans } from "next/font/google";
-import OrderForm from "./components/order_form";
+import { Product } from "@/db/schema";
 
 const formSchema = z.object({
-  id: z.string(),
-  orderNumber: z.string().startsWith("ORD_"),
-  deliveryDate: z.string({
-    message: "Enter the date of delivery",
-  }),
-  deliverer: z.string({
-    message: "Enter the name of the person who made the delivery.",
-  }),
-  userId: z.string().startsWith("user_"),
   supplierId: z
     .string({
       message: "Enter the id of the supplier",
-    })
-    .startsWith(""),
-  quantity: z.string({
-    message: "Enter the number of kgs",
-  }),
+    }).min(1,"Please enter a valid value"),
+  userId: z.string(),
+  driverName: z.string({
+    message: "Enter the name of the person who made the delivery.",
+  }).min(1,"Please enter a valid value"),
+  deliveryDate: z.any(),
   deliveryNoteId: z.string({
     message: "Enter the id of the delivery note.",
-  }),
-  deliveryImage: z.string().nullable(),
+  }).min(1,"Please enter a valid value"),
 });
 
 const productSchema = z.object({
-  product: z.array(
-    z.object({
-      name: z.string(),
-      good: z.string(),
-      fair: z.string(),
-      reject: z.string(),
-      orderId: z.string(),
-      description: z.string(),
-    })
-  ),
+  name: z.string().min(1,"Please enter a valid value"),
+  description: z.string(),
+  good: z.string(),
+  fair: z.string(),
+  poor: z.string(),
 });
-const id = short.generate();
-const orderNumber = `ORD_${id}`;
 
 export default function OrderCreate() {
   const user = useUser();
@@ -78,72 +54,47 @@ export default function OrderCreate() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      id: id,
-      orderNumber: orderNumber,
-      deliveryDate: "",
-      deliverer: "",
-      userId: user.user?.id,
       supplierId: "",
-      quantity: "0",
-      deliveryNoteId: "Enter delivery note",
-      deliveryImage: "",
+      userId: user.user?.id,
+      driverName: "",
+      deliveryDate: "",
+      deliveryNoteId: "",
     },
   });
 
-  const productForm = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    trigger,
+  } = useForm({
     resolver: zodResolver(productSchema),
     defaultValues: {
-      product: [
-        {
-          name: "",
-          reject: "0",
-          fair: "0",
-          good: "0",
-          orderId: id,
-          description: "-",
-        },
-      ],
+      name: "",
+      description: "-",
+      good: 0,
+      fair: 0,
+      poor: 0,
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    setLoading(true);
-    await createOrder({
-      id: data.id,
-      orderNumber: data.orderNumber,
-      deliveryDate: data.deliveryDate,
-      deliverer: data.deliverer,
-      supplierId: data.supplierId,
-      userId: data.userId,
-      quantity: data.quantity,
-      deliveryNoteId: data.deliveryNoteId,
-      deliveryImage: url,
-      products: product,
-    });
-    setLoading(false);
+  const onSubmit = async (data: any) => {
+    const driverName = await form.trigger("driverName");
+    const deliveryNoteId = await form.trigger("deliveryNoteId");
+    const supplierId = await form.trigger("supplierId");
+
+    console.log(data);
+    // setLoading(true);
+
+    // setLoading(false);
     toast.success("Order created successfully");
-    router.push("/dashboard/orders");
-    router.refresh();
+    // router.push("/dashboard/orders");
+    // router.refresh();
   };
 
-  const onProductSubmit = (data: z.infer<typeof productSchema>) => {
-    setProduct((prev: Product[]) => {
-      return [
-        ...(prev as Product[]),
-        {
-          id: uuidv1(),
-          name: data.product[0].name,
-          good: Number(data.product[0].good),
-          fair: Number(data.product[0].fair),
-          reject: Number(data.product[0].reject),
-          orderId: id,
-          description: data.product[0].description,
-          createdAt: new Date(),
-          updatedAt: null,
-        },
-      ];
-    });
-    // clear the form
+  const onProductSubmit = (item: any) => {
+    setProduct([...product, item]);
   };
 
   return (
@@ -156,20 +107,15 @@ export default function OrderCreate() {
             </div>
             <div className="flex flex-col">
               <h1 className="text-[16px] font-semibold">Add Order</h1>
-              {/* <h1 className="text-[12px] font-medium text-gray-500">
-                #{orderNumber}
-              </h1> */}
             </div>
           </div>
           <div
             onClick={form.handleSubmit(onSubmit)}
-            className="flex bg-green-800 rounded-[30px] py-[10px] px-[50px] gap-2 items-center hover:bg-green-700 ml-20"
+            className="flex bg-green-800 rounded-[5px] py-[10px] px-[50px] gap-2 items-center hover:bg-green-700 ml-20"
           >
-            {Loading ? (
-              <LoaderIcon className=" w-8 animate-spin h-5" color="#ffffff" />
-            ) : (
-              <div></div>
-            )}
+            {Loading
+              ? <LoaderIcon className=" w-8 animate-spin h-5" color="#ffffff" />
+              : <div></div>}
             <h5 className="font-medium text-[13px] text-white">Save</h5>
           </div>
         </div>
@@ -179,177 +125,243 @@ export default function OrderCreate() {
           <div className="flex flex-row justify-between mb-5 items-center">
             <h1 className="text-[20px] font-semibold">Order Details</h1>
           </div>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className=" flex mx-auto w-full"
-            >
-              <div className="flex flex-col w-full space-y-5">
-                <div className="flex flex-row w-full gap-20">
-                  <OrderForm
-                    form={form}
-                    name="deliverer"
-                    title="Name of Deliverer"
-                    placeholder="Name of the person who made the delivery."
-                  />
-                  <OrderForm
-                    form={form}
-                    name="deliveryDate"
-                    title="Date of Delivery"
-                    placeholder="Date of Delivery."
-                  />
-                </div>
-                <div className="flex flex-row w-full gap-20">
-                  <OrderForm
-                    form={form}
-                    name="supplierId"
-                    title="Supplier ID"
-                    placeholder="Supplier ID"
-                  />
-                  <OrderForm
-                    form={form}
-                    name="quantity"
-                    title="Quantity"
-                    placeholder="Quantity"
-                  />
-                </div>
-                <div className="flex flex-row gap-20 items-center justify-center">
-                  <OrderForm
-                    form={form}
-                    name="deliveryNote"
-                    title="Delivery Note ID"
-                    placeholder="Delivery Note ID"
-                  />
-                  <div className="flex flex-row w-full gap-5 items-end">
-                    <SimpleUploadButton setUrl={setUrl} />
-                    {url == "" ? (
-                      <div></div>
-                    ) : (
-                      <Image
-                        src={url}
-                        alt={form.getValues("deliverer")}
-                        width={50}
-                        height={30}
-                        style={{ objectFit: "fill" }}
-                        className="aspect-1 rounded-[10px] h-[70px] w-[70px]"
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </form>
-          </Form>
+          <OrderSection />
         </div>
-        {/* add product */}
-        <div className="flex flex-col bg-white p-10 rounded-[10px] mt-[30px]">
-          <div className="flex flex-row justify-between  mb-5 items-center">
-            <h1 className="text-[20px] font-semibold">Add Product</h1>
-            <Button
-              variant="outline"
-              className="w-fit"
-              onSubmit={productForm.handleSubmit(onProductSubmit)}
-              onClick={productForm.handleSubmit(onProductSubmit)}
-            >
-              Add Product
-            </Button>
-          </div>
-          <Form {...productForm}>
-            <form
-              onSubmit={productForm.handleSubmit(onProductSubmit)}
-              className=" flex mx-auto w-full"
-            >
-              <div className="flex flex-col w-full space-y-5">
-                <div className="flex flex-row w-full gap-20">
-                  <OrderForm
-                    form={productForm}
-                    name="product[0].name"
-                    title="Name"
-                    placeholder="Product Name"
-                  />
-                  <OrderForm
-                    form={productForm}
-                    name="product[0].description"
-                    title="Description (optional)"
-                    placeholder="Product Description"
-                  />
-                </div>
-
-                <div className="flex flex-row w-full gap-20">
-                  <OrderForm
-                    form={productForm}
-                    name="product[0].good"
-                    title="Good Quality"
-                    placeholder="Good Items"
-                  />
-                  <OrderForm
-                    form={productForm}
-                    name="product[0].fair"
-                    title="Fair Quality"
-                    placeholder="Fair Items"
-                  />
-                </div>
-                <div className="flex flex-row w-full gap-20">
-                  <OrderForm
-                    form={productForm}
-                    name="product[0].reject"
-                    title="Rejected Quality"
-                    placeholder="Rejected Items"
-                  />
-                  <div className="flex w-full"></div>
-                </div>
-              </div>
-            </form>
-          </Form>
-          <Table className="mt-5">
-            <TableHeader>
-              <TableRow>
-                {/* <TableHead className="w-[300px]">Image</TableHead> */}
-                <TableHead className="w-[300px]">Name</TableHead>
-                <TableHead className="w-[300px]">Good</TableHead>
-                <TableHead className="w-[300px]">Fair</TableHead>
-                <TableHead className="w-[300px]">Reject</TableHead>
-                <TableHead className="w-[300px]">Description</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {product.map((item: any) => (
-                <TableRow key={item.id}>
-                  {/* <TableCell className="font-medium">
-                    <Image
-                      src={"https://www.picsa.pro/profile.jpg"}
-                      alt={item.name}
-                      width={50}
-                      height={30}
-                      style={{ objectFit: "cover" }}
-                      className="aspect-1 rounded-[200px] h-[50px] w-[50px]"
-                    />
-                  </TableCell> */}
-                  <TableCell className="text-black w-[300px]">
-                    {item.name}
-                  </TableCell>
-                  <TableCell className="text-black w-[300px]">
-                    {item.good}
-                  </TableCell>
-                  <TableCell className="text-black w-[300px]">
-                    {item.fair}
-                  </TableCell>
-                  <TableCell className="text-black w-[300px]">
-                    {item.reject}
-                  </TableCell>
-
-                  <TableCell className="text-black w-[300px]">
-                    {item.description}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+        <ProductSection />
       </div>
     </main>
   );
+
+  function OrderSection() {
+    return (
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className=" flex mx-auto w-full"
+      >
+        <div className="flex flex-col w-full space-y-5">
+          <div className="flex flex-row w-full gap-20">
+            <div className="flex flex-col items-start justify-start w-full">
+              <FormTitle title="Driver Name" />
+              <input
+                type="text"
+                id="driverName"
+                {...form.register("driverName")}
+                className={`w-full p-2 mt-2 rounded-[5px] border-[0.5px] ${
+                  form.formState.errors.driverName ? "border-red-500" : "border-gray"
+                } `}
+              />
+              {form.formState.errors.driverName && (
+                <span className="text-sm text-red-500 mt-1 block text-[10px]">
+                  {form.formState.errors.driverName.message?.toString()}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col items-start justify-start w-full">
+              <FormTitle title="Delivery date" />
+              <input
+                type="date"
+                id="deliveryDate"
+                {...form.register("deliveryDate")}
+                className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-row w-full gap-20">
+            <div className="flex flex-col items-start justify-start w-full">
+              <FormTitle title="Supplier Id" />
+              <input
+                type="text"
+                id="supplierId"
+                {...form.register("supplierId")}
+                className={`w-full p-2 mt-2 rounded-[5px] border-[0.5px] ${
+                  form.formState.errors.supplierId ? "border-red-500" : "border-gray"
+                } `}
+              />
+              {form.formState.errors.supplierId && (
+                <span className="text-sm text-red-500 mt-1 block text-[10px]">
+                  {form.formState.errors.supplierId.message?.toString()}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col items-start justify-start w-full">
+              <FormTitle title="Delivery Note Id" />
+              <input
+                type="text"
+                id="deliveryNoteId"
+                {...form.register("deliveryNoteId")}
+                className={`w-full p-2 mt-2 rounded-[5px] border-[0.5px] ${
+                  form.formState.errors.deliveryNoteId ? "border-red-500" : "border-gray"
+                } `}
+              />
+              {form.formState.errors.deliveryNoteId && (
+                <span className="text-sm text-red-500 mt-1 block text-[10px]">
+                  {form.formState.errors.deliveryNoteId.message?.toString()}
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-row gap-20 items-center justify-center">
+            <div className="flex flex-row w-full gap-5 items-end">
+              <SimpleUploadButton setUrl={setUrl} />
+              {url == "" ? <div></div> : (
+                <Image
+                  src={url}
+                  alt={"delivery note"}
+                  width={50}
+                  height={50}
+                  style={{ objectFit: "cover" }}
+                  className="aspect-1 rounded-[5px] h-[70px] w-[70px]"
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
+  function ProductSection() {
+    return (
+      <div className="flex flex-col bg-white p-10 rounded-[10px] mt-[30px]">
+        <div className="flex flex-row justify-between  mb-5 items-center">
+          <h1 className="text-[20px] font-semibold">Add Product</h1>
+          <Button
+            variant="outline"
+            className="w-fit"
+            onClick={handleSubmit(onProductSubmit)}
+          >
+            Add Product
+          </Button>
+        </div>
+
+        <form
+          onSubmit={handleSubmit(onProductSubmit)}
+          className=" flex mx-auto w-full"
+        >
+          <div className="flex flex-col w-full space-y-5">
+            <div className="flex flex-row w-full gap-20">
+              <div className="flex flex-col items-start justify-start w-full">
+                <FormTitle title="Name" />
+                <input
+                  type="text"
+                  id="name"
+                  {...register("name")}
+                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                />
+              </div>
+              <div className="flex flex-col items-start justify-start w-full">
+                <FormTitle title="Description (optional)" />
+                <input
+                  type="text"
+                  id="description"
+                  {...register("description")}
+                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-row w-full gap-20">
+              <div className="flex flex-col items-start justify-start w-full">
+                <FormTitle title="Good Quality" />
+                <input
+                  type="text"
+                  id="good"
+                  {...register("good")}
+                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                />
+              </div>
+              <div className="flex flex-col items-start justify-start w-full">
+                <FormTitle title="Fair Quality" />
+                <input
+                  type="text"
+                  id="fair"
+                  {...register("fair")}
+                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                />
+              </div>
+            </div>
+            <div className="flex flex-row w-full gap-20">
+              <div className="flex flex-col items-start justify-start w-full">
+                <FormTitle title="Poor Quality" />
+                <input
+                  type="text"
+                  id="poor"
+                  {...register("poor")}
+                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                />
+              </div>
+              <div className="flex w-full"></div>
+            </div>
+          </div>
+        </form>
+        <Table className="mt-5">
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[300px]">Name</TableHead>
+              <TableHead className="w-[300px]">Good</TableHead>
+              <TableHead className="w-[300px]">Fair</TableHead>
+              <TableHead className="w-[300px]">Poor</TableHead>
+              <TableHead className="w-[300px]">Description</TableHead>
+              <TableHead className="w-[5px]"></TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {product.map((item: Product, index) => (
+              <TableRow
+                key={index}
+                className="items-center justify-center"
+                onClick={() => {
+                  //set the form with values
+                  setValue("name", item.name);
+                  setValue("good", item.good || 0);
+                  setValue("fair", item.fair || 0);
+                  setValue("poor", item.poor || 0);
+                  setValue("description", item.description || "-");
+                  setProduct(product.filter((_, i) => i !== index));
+                }}
+              >
+                <TableCell className="text-black w-[300px]">
+                  {item.name}
+                </TableCell>
+                <TableCell className="text-black w-[300px]">
+                  {item.good}
+                </TableCell>
+                <TableCell className="text-black w-[300px]">
+                  {item.fair}
+                </TableCell>
+                <TableCell className="text-black w-[300px]">
+                  {item.poor}
+                </TableCell>
+
+                <TableCell className="text-black w-[300px]">
+                  {item.description}
+                </TableCell>
+                <TableCell className="text-black w-[300px]">
+                  <Button
+                    variant="outline"
+                    className="w-fit"
+                    onClick={() => {
+                      setProduct(product.filter((_, i) =>
+                        i !== index
+                      ));
+                    }}
+                  >
+                    Remove
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    );
+  }
 }
 
+const FormTitle = ({ title }: { title: string }) => {
+  return <h5 className=" text-[13px] font-medium text-black">{title}</h5>;
+};
 function UploadSVG() {
   return (
     <svg

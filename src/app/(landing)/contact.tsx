@@ -6,7 +6,7 @@ import { ArrowUpRight, ArrowDownFromLine, MoveRight } from "lucide-react";
 export default function ContactSection() {
   return (
     <Element name="contact">
-      <section className="relative px-1 py-20 bg-black-100 mx-0 lg:mx-20 md:mx-20">
+      <section className="relative px-1 bg-black-100 mx-0 ">
         <div className="md:flex lg:flex flex-row justify-center items-end  bg-white">
           <div className="flex flex-col p-10 mr-32">
             <h1
@@ -60,22 +60,22 @@ export default function ContactSection() {
             </div>
 
             <div>
-              <div className="bg-black  flex flex-col mx-5 lg:mx-0 md:mx-0 mt-10 py-10 lg:py-20 md:py-20 px-9 mx-w-2xl  sm:rounded-[30px] md:roundex-[0px]  lg:roundex-[0px] ">
+              <div className="bg-black flex flex-col mx-5 lg:mx-0 md:mx-0 mt-10 py-10 lg:py-20 md:py-20 px-9 mx-w-2xl  ">
                 <div>
                   <p className="font-semibold text-white mb-8 text-xl lg:text-5xl">
                     Contact Us
                   </p>
                   <div className="flex flex-col lg:gap-7 md:gap-7 gap-4">
                     <div className="flex flex-col justify-center items-center  gap-4">
-                      <div className="w-full flex flex-col lg:flex-row md:flex-row gap-4">
+                      <div className="w-full flex flex-col lg:flex-row md:flex-row gap-4 mt-5">
                         <input
-                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
+                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[5px]   border-[0.2px] border-gray placeholder:text-[11px]"
                           type="text"
                           placeholder="Name"
                         />
 
                         <input
-                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
+                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[5px]   border-[0.2px] border-gray placeholder:text-[11px]"
                           type="email"
                           placeholder="Email"
                         />
@@ -83,12 +83,12 @@ export default function ContactSection() {
 
                       <div className=" w-full flex flex-col lg:flex-row md:flex-row gap-4 ">
                         <input
-                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
+                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[5px]  border-[0.2px] border-gray placeholder:text-[11px]"
                           type="phone"
                           placeholder="Phone"
                         />
                         <input
-                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[10px]  border-[0.1px]"
+                          className=" flex w-full  px-4 py-3 bg-transparent text-[14px] rounded-[5px]   border-[0.2px] border-gray placeholder:text-[11px]"
                           type="text"
                           placeholder="Subject"
                         />
