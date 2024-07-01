@@ -1,6 +1,8 @@
 ## todo
 
 - [x] Map dummy data for the ui
-- [ ] Create the prisma models
-- [ ] Build the logic for the invetory via the next apis.
+- [x] Create the prisma models
+- [x] Build the logic for the invetory via the next apis.
 
+
+### the name if the 

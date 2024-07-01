@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useUploadThing } from "@/utils/uploadthing";
 import { toast } from "sonner";
 import { LoaderIcon } from "lucide-react";
-import { FormLabel } from "@/components/ui/form";
 import { set } from "zod";
 import React from "react";
 
@@ -84,7 +83,7 @@ export function SimpleUploadButton({
 
   return (
     <div className="flex flex-col w-full gap-3 justify-start items-start">
-      <FormLabel>Upload Delivery Note</FormLabel>
+      <h5 className=" text-[13px] font-medium text-black">Upload Delivery Note</h5>
       <label htmlFor="upload-button" className="cursor-pointer">
         <div className="flex flex-row items-center gap-3 border-[1px] border-gray-300 px-7 py-3 rounded-[10px]">
           <h6 className="text-[14px]">Upload</h6>

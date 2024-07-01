@@ -7,18 +7,16 @@ import {
   AlignCenterVertical,
   BellIcon,
   ChevronRightIcon,
-  CogIcon,
-  HeartIcon,
   HistoryIcon,
   LayoutGridIcon,
-  LoaderIcon,
   LucideProps,
   ShoppingBagIcon,
-  StoreIcon,
-  Users2Icon,
+  StoreIcon
 } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+
 
 const menuItems: {
   title: string;
@@ -44,11 +42,6 @@ const menuItems: {
       title: "Inventory",
       href: "/dashboard/inventory",
       icon: (p: LucideProps) => <AlignCenterVertical {...p} />,
-    },
-    {
-      title: "Profile & Settings",
-      href: "/dashboard/profile",
-      icon: (p: LucideProps) => <CogIcon {...p} />,
     },
     {
       title: "Recent Items",

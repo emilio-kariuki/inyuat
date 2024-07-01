@@ -2,6 +2,7 @@
 import { useUser } from "@clerk/nextjs";
 import UserText from "./components/user_text";
 import GoodProducts from "./components/products";
+import { Metadata } from "next";
 
 const dataFormatter = (number: number) => {
   return "Ksh " + Intl.NumberFormat("us").format(number).toString();
@@ -17,6 +18,12 @@ const items = [
   "Baby Corn",
   "Peas"
 ];
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Get fresh farm produce delivered to your doorstep.",
+};
+
 
 export default function DashboardPage() {
   

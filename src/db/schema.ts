@@ -1,63 +1,57 @@
 import { relations, sql } from "drizzle-orm";
 import {
+  boolean,
   doublePrecision,
+  integer,
+  json,
+  jsonb,
   pgTable,
   serial,
   text,
-  varchar,
   timestamp,
-  integer,
-  jsonb,
-  json,
+  uuid,
+  varchar,
 } from "drizzle-orm/pg-core";
-import { v1 as uuidv1 } from "uuid";
 
-// define enum
-export enum QUALITY {
-  GOOD = "GOOD",
-  FAIR = "FAIR",
-  REJECT = "REJECT",
-}
 
-export const users = pgTable("inyuat_users", {
+export const user = pgTable("inyuat_user", {
   id: text("id")
-    .primaryKey()
-    .default("USR_" + uuidv1()),
+    .primaryKey(),
+  name: text("name"),
   email: text("email").unique(),
-  phone: varchar("phone", { length: 256 }),
-  name: varchar("name", { length: 256 }),
+  phone: text("phone"),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt").default(sql`CURRENT_TIMESTAMP`),
 });
 
-export const userRelations = relations(users, ({ many }) => ({
+export const userRelation = relations(user, ({ many }) => ({
   orders: many(orders),
 }));
 
 export const orders = pgTable("inyuat_orders", {
-  id: text("id").primaryKey().default(uuidv1()),
-  orderNumber: text("orderNumber").unique(),
-  total: doublePrecision("total"),
-  quality: text("quality").notNull().default(QUALITY.GOOD),
-  userId: text("userId")
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
-    .notNull(),
-  supplierId: text("supplierId")
-    .references(() => suppliers.id, {
-      onDelete: "cascade",
-      onUpdate: "cascade",
-    })
-    .notNull(),
-  quantity: integer("quantity"),
-  deliveryNote: text("deliveryNote"),
+  id: text("id")
+    .primaryKey(),
+  userId: text("userId").references(() => user.id, {
+    onDelete: "cascade",
+    onUpdate: "cascade",
+  }).notNull(),
+  supplierId: text("supplierId").references(() => suppliers.id, {
+    onDelete: "cascade",
+    onUpdate: "cascade",
+  }).notNull(),
+  orderNumber: text("orderNumber"), // should be unique and generated
+  driverName: text("driverName"),
+  deliveryDate: text("deliveryDate").default(sql`CURRENT_TIMESTAMP`),
+  deliveryNoteImage: text("deliveryNoteImages").array(),
+  deliveryNoteId: text("deliveryNoteId"),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt").default(sql`CURRENT_TIMESTAMP`),
 });
 
-export const orderRelations = relations(orders, ({ one, many }) => ({
-  user: one(users, {
+export const orderRelation = relations(orders, ({ one, many }) => ({
+  user: one(user, {
     fields: [orders.userId],
-    references: [users.id],
+    references: [user.id],
   }),
   products: many(products),
   supplier: one(suppliers, {
@@ -68,57 +62,83 @@ export const orderRelations = relations(orders, ({ one, many }) => ({
 
 export const products = pgTable("inyuat_products", {
   id: text("id")
-    .primaryKey()
-    .default("PRD_" + uuidv1()),
-  name: text("name").notNull(),
-  description: text("description"),
+    .primaryKey(),
+  name: text("name").references(() => productCategories.name, {
+    onDelete: "cascade",
+    onUpdate: "cascade",
+  }).notNull(),
+  description: text("description").default(""), //(optional)
   good: integer("good").default(0),
   fair: integer("fair").default(0),
-  reject: integer("reject").default(0),
-  orderId: text("orderId")
-    .references(() => orders.id, { onDelete: "cascade", onUpdate: "cascade" })
-    .notNull(),
+  poor: integer("poor").default(0),
+  orderId: text("orderId").references(() => orders.id, {
+    onDelete: "cascade",
+    onUpdate: "cascade",
+  }).notNull(),
+  status: text("status").default("pending"),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt").default(sql`CURRENT_TIMESTAMP`),
 });
 
-export const images = pgTable("inyuat_images", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 256 }).notNull(),
-  url: varchar("url", { length: 1024 }).notNull(),
-  userId: varchar("userId", { length: 256 }).notNull(),
-  createdAt: timestamp("created_at")
-    .default(sql`CURRENT_TIMESTAMP`)
-    .notNull(),
-  updatedAt: timestamp("updatedAt"),
-});
-
-
-export const productRelations = relations(products, ({ one }) => ({
+export const productRelation = relations(products, ({ one }) => ({
   order: one(orders, {
     fields: [products.orderId],
     references: [orders.id],
   }),
+  productCategories: one(productCategories, {
+    fields: [products.name],
+    references: [productCategories.name],
+  }),
 }));
 
-export const suppliers = pgTable("inyuat_suppliers", {
-  id: text("id").primaryKey().default(`SUPP_${uuidv1()}`),
-  name: text("name"),
-  email: text("email"),
-  phone: text("phone"),
+export const productCategories = pgTable("inyuat_product_categories", {
+  name: text("name").primaryKey(),
+  cycle: integer("cycle").default(0),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt").default(sql`CURRENT_TIMESTAMP`),
 });
 
-export const supplierRelations = relations(suppliers, ({ many }) => ({
-  order: many(orders, { relationName: "orders" }),
+export const productCategoryRelation = relations(
+  productCategories,
+  ({ many }) => ({
+    products: many(products),
+  }),
+);
+
+export const suppliers = pgTable("inyuat_suppliers", {
+  id: text("id")
+    .primaryKey(),
+  name: text("name"),
+  email: text("email").unique(),
+  phone: text("phone"),
+  image: text("image").default("https://picsa.pro/profile.jpg"),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const supplierRelation = relations(suppliers, ({ many }) => ({
+  orders: many(orders),
 }));
 
-export type User = typeof users.$inferSelect;
-export type Order = typeof orders.$inferSelect;
+export const notifications = pgTable("inyuat_notifications", {
+  id: text("id")
+    .primaryKey(),
+  content: text("content"),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").default(sql`CURRENT_TIMESTAMP`),
+});
+
+
+export type User = typeof user.$inferSelect;
+export type order = typeof orders.$inferSelect;
 export type Product = typeof products.$inferSelect;
+export type ProductCategory = typeof productCategories.$inferSelect;
 export type Supplier = typeof suppliers.$inferSelect;
-export type NewUser = typeof users.$inferInsert;
-export type NewOrder = typeof orders.$inferInsert;
-export type NewProduct = typeof products.$inferInsert;
-export type NewSupplier = typeof suppliers.$inferInsert;
+export type Notification = typeof notifications.$inferSelect;
+
+export const schema = [
+  user,
+  orders,
+  products,
+  notifications,
+];

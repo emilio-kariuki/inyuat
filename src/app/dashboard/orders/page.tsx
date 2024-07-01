@@ -20,12 +20,19 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { Order, Product, orders } from "@/db/schema";
-import { getOrders } from "@/lib/actions/orders.actions";
+import { Product, orders } from "@/db/schema";
 import UserText from "../(dashboard)/components/user_text";
+import axios from "axios";
 
 export default async function Inventory() {
-  const results = await getOrders();
+  const response = await axios.get(
+    "https://84.247.174.84/inyuat/api/order/get",
+    {
+      headers: {
+        "APIKEY": "INT_okbONyVVRXRKeD198duXZ483rzsYMI",
+      },
+    },
+  );
 
   return (
     <div className="flex flex-col h-full min-h-screen w-full items-start justify-start bg-white  p-[28px]">
@@ -43,7 +50,7 @@ export default async function Inventory() {
         </Link>
       </div>
 
-      {results?.map((order: any, idx: Number) => {
+      {response.data?.map((order: any, idx: Number) => {
         return (
           <div key={order.id} className="my-5 flex flex-col flex-wrap w-full">
             <section className="flex  flex-col items-center justify-between rounded-lg bg-gray-100/80 p-6 py-8 md:flex-row ">
@@ -72,7 +79,7 @@ export default async function Inventory() {
                 <span className="text-muted-foreground text-sm mb-2">
                   Placed By
                 </span>
-                <span className="text-sm">{order.user.name}</span>
+                <span className="text-sm">{order.supplier.name}</span>
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="text-muted-foreground text-sm mb-2">
@@ -116,7 +123,7 @@ export default async function Inventory() {
                     {item.fair} boxes
                   </TableCell>
                   <TableCell className="text-black w-[300px]">
-                    {item.reject} boxes 
+                    {item.poor} boxes 
                   </TableCell>
                   <TableCell className="text-black w-[300px]">
                     {item.description}
