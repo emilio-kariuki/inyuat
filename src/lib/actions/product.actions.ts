@@ -29,13 +29,13 @@ export const getTotalProducts = async (title: string) => {
     result.map((product) => {
       good += product.good || 0;
       fair += product.fair || 0;
-      reject += product.reject || 0;
+      reject += product.poor || 0;
     });
     return {
       good: good,
       fair: fair,
       reject: reject,
-      url: result[0].image,
+      url: result[0],
     };
   } catch (error) {
     console.log("An error occurred while fetching products", error);
