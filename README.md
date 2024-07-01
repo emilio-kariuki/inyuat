@@ -1,5 +1,3 @@
-# Inyuat dashboard
-
 ## todo
 
 - [x] Map dummy data for the ui
@@ -8,3 +6,4 @@
 
 
 ### the name if the
+
