@@ -5,64 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1715874613917,
-      "tag": "0000_wild_ma_gnuci",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1715874654191,
-      "tag": "0001_lucky_sleepwalker",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1715874815113,
-      "tag": "0002_small_starfox",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1715886710844,
-      "tag": "0003_fluffy_changeling",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1715937433154,
-      "tag": "0004_foamy_toad_men",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "6",
-      "when": 1715938596214,
-      "tag": "0005_nifty_carmella_unuscione",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "6",
-      "when": 1715960984055,
-      "tag": "0006_brown_phalanx",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "6",
-      "when": 1715981691227,
-      "tag": "0007_skinny_retro_girl",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "6",
-      "when": 1716065458750,
-      "tag": "0008_melodic_karnak",
+      "when": 1719876069043,
+      "tag": "0000_yummy_wrecking_crew",
       "breakpoints": true
     }
   ]
