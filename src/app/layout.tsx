@@ -23,7 +23,7 @@ export default function RootLayout({
     <ClerkProvider>
       <Providers>
         <html suppressHydrationWarning lang="en">
-          <body className={`bg-[#EDF3F2] ${inter.className}`}>
+          <body className={`bg-[#EDF3F2] ${inter.className}` }>
             <Header />
             <main>{children}</main>
             <Toaster />

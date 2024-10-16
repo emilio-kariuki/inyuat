@@ -1,5 +1,5 @@
 "use client";
-import { ChevronLeft, LoaderIcon, Save, X } from "lucide-react";
+import { ArrowLeft, ChevronLeft, LoaderIcon, Save, X } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -98,12 +98,12 @@ export default function OrderCreate() {
   };
 
   return (
-    <main className=" flex flex-col border-r-[1px] border-gray h-full min-h-screen w-full items-start justify-start bg-white p-[15px]">
+    <main className=" flex flex-col border-r-[1px] border-gray  h-full min-h-screen w-full items-start justify-start bg-white p-[15px]">
       <div className="flex flex-row gap-4 items-center justify-center mb-5 w-full px-[5px]">
         <div className="flex flex-row justify-between w-full items-center">
           <div className="flex flex-row items-center gap-2">
             <div onClick={() => router.back()}>
-              <ChevronLeft className="h-6 w-6 text-gray-500" />
+              <ArrowLeft className="h-6 w-6 text-gray-500" />
             </div>
             <div className="flex flex-col">
               <h1 className="text-[16px] font-semibold">Add Order</h1>
@@ -139,7 +139,7 @@ export default function OrderCreate() {
         className=" flex mx-auto w-full"
       >
         <div className="flex flex-col w-full space-y-5">
-          <div className="flex flex-row w-full gap-20">
+          <div className="flex flex-row w-full gap-10">
             <div className="flex flex-col items-start justify-start w-full">
               <FormTitle title="Driver Name" />
               <input
@@ -147,7 +147,7 @@ export default function OrderCreate() {
                 id="driverName"
                 {...form.register("driverName")}
                 className={`w-full p-2 mt-2 rounded-[5px] border-[0.5px] ${
-                  form.formState.errors.driverName ? "border-red-500" : "border-gray"
+                  form.formState.errors.driverName ? "border-red-500" : "border-gray-500 "
                 } `}
               />
               {form.formState.errors.driverName && (
@@ -162,12 +162,12 @@ export default function OrderCreate() {
                 type="date"
                 id="deliveryDate"
                 {...form.register("deliveryDate")}
-                className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray-500  "
               />
             </div>
           </div>
 
-          <div className="flex flex-row w-full gap-20">
+          <div className="flex flex-row w-full gap-10">
             <div className="flex flex-col items-start justify-start w-full">
               <FormTitle title="Supplier Id" />
               <input
@@ -175,7 +175,7 @@ export default function OrderCreate() {
                 id="supplierId"
                 {...form.register("supplierId")}
                 className={`w-full p-2 mt-2 rounded-[5px] border-[0.5px] ${
-                  form.formState.errors.supplierId ? "border-red-500" : "border-gray"
+                  form.formState.errors.supplierId ? "border-red-500" : "border-gray-500 "
                 } `}
               />
               {form.formState.errors.supplierId && (
@@ -191,7 +191,7 @@ export default function OrderCreate() {
                 id="deliveryNoteId"
                 {...form.register("deliveryNoteId")}
                 className={`w-full p-2 mt-2 rounded-[5px] border-[0.5px] ${
-                  form.formState.errors.deliveryNoteId ? "border-red-500" : "border-gray"
+                  form.formState.errors.deliveryNoteId ? "border-red-500" : "border-gray-500 "
                 } `}
               />
               {form.formState.errors.deliveryNoteId && (
@@ -201,7 +201,7 @@ export default function OrderCreate() {
               )}
             </div>
           </div>
-          <div className="flex flex-row gap-20 items-center justify-center">
+          <div className="flex flex-row gap-10 items-center justify-center">
             <div className="flex flex-row w-full gap-5 items-end">
               <SimpleUploadButton setUrl={setUrl} />
               {url == "" ? <div></div> : (
@@ -240,14 +240,14 @@ export default function OrderCreate() {
           className=" flex mx-auto w-full"
         >
           <div className="flex flex-col w-full space-y-5">
-            <div className="flex flex-row w-full gap-20">
+            <div className="flex flex-row w-full gap-10">
               <div className="flex flex-col items-start justify-start w-full">
                 <FormTitle title="Name" />
                 <input
                   type="text"
                   id="name"
                   {...register("name")}
-                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray-500  "
                 />
               </div>
               <div className="flex flex-col items-start justify-start w-full">
@@ -256,19 +256,19 @@ export default function OrderCreate() {
                   type="text"
                   id="description"
                   {...register("description")}
-                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray-500  "
                 />
               </div>
             </div>
 
-            <div className="flex flex-row w-full gap-20">
+            <div className="flex flex-row w-full gap-10">
               <div className="flex flex-col items-start justify-start w-full">
                 <FormTitle title="Good Quality" />
                 <input
                   type="text"
                   id="good"
                   {...register("good")}
-                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray-500  "
                 />
               </div>
               <div className="flex flex-col items-start justify-start w-full">
@@ -277,18 +277,18 @@ export default function OrderCreate() {
                   type="text"
                   id="fair"
                   {...register("fair")}
-                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray-500  "
                 />
               </div>
             </div>
-            <div className="flex flex-row w-full gap-20">
+            <div className="flex flex-row w-full gap-10">
               <div className="flex flex-col items-start justify-start w-full">
                 <FormTitle title="Poor Quality" />
                 <input
                   type="text"
                   id="poor"
                   {...register("poor")}
-                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray "
+                  className="w-full p-2 mt-2 rounded-[5px] border-[0.5px] border-gray-500 -600 "
                 />
               </div>
               <div className="flex w-full"></div>
@@ -303,7 +303,7 @@ export default function OrderCreate() {
               <TableHead className="w-[300px]">Fair</TableHead>
               <TableHead className="w-[300px]">Poor</TableHead>
               <TableHead className="w-[300px]">Description</TableHead>
-              <TableHead className="w-[5px]"></TableHead>
+              <TableHead className="w-[50px]"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -337,7 +337,7 @@ export default function OrderCreate() {
                 <TableCell className="text-black w-[300px]">
                   {item.description}
                 </TableCell>
-                <TableCell className="text-black w-[300px]">
+                <TableCell className="text-black w-[50px]">
                   <Button
                     variant="outline"
                     className="w-fit"

@@ -35,7 +35,7 @@ export default async function Inventory() {
   );
 
   return (
-    <div className="flex flex-col h-full min-h-screen w-full items-start justify-start bg-white  p-[28px]">
+    <div className="flex flex-col h-full min-h-screen w-full items-start justify-start bg-white px-[100px] pt-[40px]">
       <UserText text="Here are the list of inventories."/>
       <div className=" w-full flex justify-between items-center mb-2">
       
@@ -77,9 +77,9 @@ export default async function Inventory() {
 
               <div className="flex flex-col gap-0.5">
                 <span className="text-muted-foreground text-sm mb-2">
-                  Placed By
+                  Driver
                 </span>
-                <span className="text-sm">{order.supplier.name}</span>
+                <span className="text-sm">{order.driverName}</span>
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="text-muted-foreground text-sm mb-2">
@@ -101,7 +101,7 @@ export default async function Inventory() {
             <Table>
               <TableHeader>
                 <TableRow>
-                {/* <TableHead className="w-[300px]">Image</TableHead> */}
+                <TableHead className="w-[30px]"></TableHead>
                 <TableHead className="w-[300px]">Name</TableHead>
                 <TableHead className="w-[300px]">Good</TableHead>
                 <TableHead className="w-[300px]">Fair</TableHead>
@@ -111,8 +111,11 @@ export default async function Inventory() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {order.products.map((item: Product) => (
+                {order.products.map((item: Product, index: number) => (
                   <TableRow key={item.id}>
+                    <TableCell className="text-black w-[30px]">
+                    {index + 1}
+                  </TableCell>
                   <TableCell className="text-black w-[300px]">
                     {item.name}
                   </TableCell>

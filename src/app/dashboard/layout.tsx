@@ -59,16 +59,16 @@ export default function DashboardLayout({
 
   return (
     <main
-      className={`mx-auto h-full min-h-screen w-full bg-white rounded-[10px] ${inter.className}`}
+      className={`mx-auto h-full min-h-screen w-full bg-white rounded-[10px]  ${inter.className}  `}
     >
-      <div className="sticky top-0 hidden  items-center gap-3 px-5 py-5 md:flex lg:flex border-b-[1px] border-gray-200">
+      <div className="sticky top-0 hidden  items-center gap-3 px-5 py-5 md:flex lg:flex border-b-[1px] border-gray-200 overflow-y-hidden">
         <span className="text-muted-foreground text-[14px]">Dashboard</span>
         <ChevronRightIcon className="text-muted-foreground h-3 w-5" />
         <span className="text-muted-foreground text-[14px]">
           {menuItems.find((item) => pathname.startsWith(item.href))?.title}
         </span>
       </div>
-      <div className="grid grid-cols-12 ">
+      <div className="grid grid-cols-10">
         <section className="col-span-2 hidden md:block border-r-[1px] border-gray-200 ">
           <div className="sticky top-20 flex flex-col space-y-2 p-5">
             {menuItems.map((item, idx) => (
@@ -90,25 +90,7 @@ export default function DashboardLayout({
             ))}
           </div>
         </section>
-        <section className="col-span-12 md:col-span-10">{children}</section>
-      </div>
-      <div className="absolute bottom-0 flex w-full items-center justify-between border-t border-gray-200/60 bg-white py-3 md:hidden">
-        {menuItems.map((item, idx) => (
-          <Link
-            key={item.title}
-            href={item.href}
-            className={cn(
-              "hover:text-primary rounded-md p-2 text-gray-600 transition-all hover:bg-gray-100",
-              pathname?.startsWith(item.href) &&
-              "text-primary bg-gray-100 font-medium",
-              idx === 0 &&
-              pathname !== "/dashboard" &&
-              "bg-transparent font-normal text-gray-600",
-            )}
-          >
-            {item.icon({ className: "h-5 w-5" })}
-          </Link>
-        ))}
+        <section className="col-span-8 md:col-span-8">{children}</section>
       </div>
     </main>
   );

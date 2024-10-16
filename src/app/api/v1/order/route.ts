@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest) => {
   try {
-    return new NextResponse(JSON.stringify("dfs"), {
+    return new NextResponse(JSON.stringify("hello"), {
       status: 200,
       headers: {
         "content-type": "application/json",
